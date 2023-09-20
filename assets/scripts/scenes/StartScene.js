@@ -2,11 +2,7 @@ class StartScene extends Phaser.Scene {
   constructor() {
     super('Start');
   }
-
-  preload() {
-    this.load.image('background', 'assets/sprites/background.jpg');
-  }
-
+  
   create() {
     this.createBackground();
   }
@@ -14,7 +10,9 @@ class StartScene extends Phaser.Scene {
   createBackground() {
     this.background = this.add.sprite(0, 0, 'background');
     this.background.setOrigin(0, 0);
+  }
 
+  animateBackground() {
     this.tweens.add({
       targets: this.background,
       x: -this.sys.game.config.width,
