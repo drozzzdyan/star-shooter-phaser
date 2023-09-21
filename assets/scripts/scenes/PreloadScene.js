@@ -4,7 +4,7 @@ class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
-
+    this.load.image('btn-start', 'assets/sprites/btn_start.jpg');
   }
 
   create() {

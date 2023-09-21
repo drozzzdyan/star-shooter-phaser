@@ -2,22 +2,19 @@ class StartScene extends Phaser.Scene {
   constructor() {
     super('Start');
   }
-  
+
   create() {
-    this.createBackground();
+    this.createBtnStart();
   }
 
-  createBackground() {
-    this.background = this.add.sprite(0, 0, 'background');
-    this.background.setOrigin(0, 0);
-  }
+  createBtnStart() {
+    const midX = this.sys.game.config.width / 2;
+    const midY = this.sys.game.config.height / 2;
 
-  animateBackground() {
-    this.tweens.add({
-      targets: this.background,
-      x: -this.sys.game.config.width,
-      duration: 5000,
-      repeat: -1,
-    });
+    this.btnStart = this.add.sprite(midX, midY, 'btn-start');
+    this.btnStart.setInteractive();
+    this.btnStart.on('pointerdown', () => {
+      this.scene.start('Level1Scene');
+    })
   }
 }
