@@ -4,17 +4,19 @@ class StartScene extends Phaser.Scene {
   }
 
   create() {
-    this.createBtnStart();
+    this.createBtns();
   }
 
-  createBtnStart() {
+  createBtns() {
     const midX = this.sys.game.config.width / 2;
     const midY = this.sys.game.config.height / 2;
 
-    this.btnStart = this.add.sprite(midX, midY, 'btn-start');
-    this.btnStart.setInteractive();
+    this.btnStart = new MenuBtn(this, midX, midY, 'start-btn', 'Start');
+    this.btnInstruction = new MenuBtn(this, midX, midY + 50, 'start-btn', 'Instruction');
+    this.btnInstruction = new MenuBtn(this, midX, midY + 100, 'start-btn', 'Settings');
+
     this.btnStart.on('pointerdown', () => {
       this.scene.start('Level1Scene');
-    })
+    })    
   }
 }
