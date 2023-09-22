@@ -6,7 +6,8 @@ class Level1Scene extends Phaser.Scene {
   create() {
     this.createBackground();
     this.animateBackground();
-    console.log(this)
+    this.player = new Player(this, this.sys.game.config.width / 2, 150, 'ship', 'ship_active');
+    this.player.moveToStartPosition();
   }
 
   createBackground() {
