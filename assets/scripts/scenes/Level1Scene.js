@@ -8,12 +8,18 @@ class Level1Scene extends Phaser.Scene {
     this.animateBackground();
     this.player = new Player(this, this.sys.game.config.width / 2, 150, 'ship', 'ship_active');
     this.player.moveToStartPosition();
-    this.player.initControll();
+    this.player.initTouchControll();
+    this.keyboard = this.input.keyboard.createCursorKeys();
+    this.player.keyboardControll();
   }
 
   createBackground() {
     this.background = this.add.sprite(0, 0, 'background');
     this.background.setOrigin(0, 0);
+  }
+
+  update() {
+    this.player.keyboardControll();
   }
 
   animateBackground() {

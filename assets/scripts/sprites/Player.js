@@ -23,7 +23,7 @@ class Player extends Phaser.GameObjects.Sprite {
     });
   }
 
-  initControll() {
+  initTouchControll() {
     let isTouching;
     this.scene.input.on('pointerdown', () => {
       isTouching = true;
@@ -35,7 +35,6 @@ class Player extends Phaser.GameObjects.Sprite {
 
     this.scene.input.on('pointermove', pointer => {
       if (isTouching) {
-        // this.y = pointer.y;
         this.scene.tweens.add({
           targets: this,
           y: pointer.y,
@@ -44,5 +43,15 @@ class Player extends Phaser.GameObjects.Sprite {
         });
       }
     });
+  }
+
+  keyboardControll() {
+    if (this.scene.keyboard.up.isDown) {
+      this.body.setVelocityY(-200);
+    } else if (this.scene.keyboard.down.isDown) {
+      this.body.setVelocityY(200);
+    } else {
+      this.body.setVelocityY(0);
+    }
   }
 }
