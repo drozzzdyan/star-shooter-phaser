@@ -1,4 +1,7 @@
-class StartScene extends Phaser.Scene {
+import MenuBtn from "../sprites/MenuBtn.js";
+import Player from "../sprites/Player.js";
+
+export default class StartScene extends Phaser.Scene {
   constructor() {
     super('Start');
   }

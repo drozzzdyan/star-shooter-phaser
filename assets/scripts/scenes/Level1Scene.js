@@ -1,6 +1,12 @@
-class Level1Scene extends Phaser.Scene {
+import Player from "../sprites/Player.js";
+
+export default class Level1Scene extends Phaser.Scene {
   constructor() {
     super('Level1Scene');
+  }
+
+  init() {
+    this.keyboard = this.input.keyboard.createCursorKeys();
   }
 
   create() {
@@ -9,17 +15,16 @@ class Level1Scene extends Phaser.Scene {
     this.player = new Player(this, this.sys.game.config.width / 2, 150, 'ship', 'ship_active');
     this.player.moveToStartPosition();
     this.player.initTouchControll();
-    this.keyboard = this.input.keyboard.createCursorKeys();
+    this.player.keyboardControll();
+  }
+
+  update() {
     this.player.keyboardControll();
   }
 
   createBackground() {
     this.background = this.add.sprite(0, 0, 'background');
     this.background.setOrigin(0, 0);
-  }
-
-  update() {
-    this.player.keyboardControll();
   }
 
   animateBackground() {

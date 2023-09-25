@@ -1,4 +1,4 @@
-class Player extends Phaser.GameObjects.Sprite {
+export default class Player extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, name, frame = 'ship') {
     super(scene, x, y, name, frame);
     this.scene = scene;
@@ -9,9 +9,9 @@ class Player extends Phaser.GameObjects.Sprite {
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
     this.body.enable = true;
+    this.velocity = 300;
     this.setInteractive();
     this.setScale(0.15);
-    // console.log(this)
   }
 
   moveToStartPosition() {
@@ -52,9 +52,9 @@ class Player extends Phaser.GameObjects.Sprite {
     const indent = 40;
 
     if (this.scene.keyboard.up.isDown && this.y > 0 + indent) {
-      this.body.setVelocityY(-200);
+      this.body.setVelocityY(-this.velocity);
     } else if (this.scene.keyboard.down.isDown && this.y < this.scene.sys.game.config.height - indent) {
-      this.body.setVelocityY(200);
+      this.body.setVelocityY(this.velocity);
     } else {
       this.body.setVelocityY(0);
     }

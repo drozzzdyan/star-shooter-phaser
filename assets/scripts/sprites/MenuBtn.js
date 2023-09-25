@@ -1,4 +1,4 @@
-class MenuBtn extends Phaser.GameObjects.Sprite {
+export default class MenuBtn extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, name, textInner) {
     super(scene, x, y, name);
     this.scene = scene;
