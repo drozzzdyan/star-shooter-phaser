@@ -10,7 +10,8 @@ class Player extends Phaser.GameObjects.Sprite {
     this.scene.physics.add.existing(this); //add the sprite to the physics
     this.body.enable = true;
     this.setInteractive();
-    this.setScale(0.16);
+    this.setScale(0.15);
+    // console.log(this)
   }
 
   moveToStartPosition() {
@@ -24,7 +25,9 @@ class Player extends Phaser.GameObjects.Sprite {
   }
 
   initTouchControll() {
+    const indent = 40;
     let isTouching;
+
     this.scene.input.on('pointerdown', () => {
       isTouching = true;
     });
@@ -34,7 +37,7 @@ class Player extends Phaser.GameObjects.Sprite {
     });
 
     this.scene.input.on('pointermove', pointer => {
-      if (isTouching) {
+      if (isTouching && pointer.y > 0 + indent && pointer.y < this.scene.sys.game.config.height - indent) {
         this.scene.tweens.add({
           targets: this,
           y: pointer.y,
@@ -46,9 +49,11 @@ class Player extends Phaser.GameObjects.Sprite {
   }
 
   keyboardControll() {
-    if (this.scene.keyboard.up.isDown) {
+    const indent = 40;
+
+    if (this.scene.keyboard.up.isDown && this.y > 0 + indent) {
       this.body.setVelocityY(-200);
-    } else if (this.scene.keyboard.down.isDown) {
+    } else if (this.scene.keyboard.down.isDown && this.y < this.scene.sys.game.config.height - indent) {
       this.body.setVelocityY(200);
     } else {
       this.body.setVelocityY(0);
