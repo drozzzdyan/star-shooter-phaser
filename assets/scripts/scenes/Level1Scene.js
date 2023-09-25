@@ -2,12 +2,13 @@ class Level1Scene extends Phaser.Scene {
   constructor() {
     super('Level1Scene');
   }
-  
+
   create() {
     this.createBackground();
     this.animateBackground();
     this.player = new Player(this, this.sys.game.config.width / 2, 150, 'ship', 'ship_active');
     this.player.moveToStartPosition();
+    this.player.initControll();
   }
 
   createBackground() {
