@@ -20,6 +20,4 @@ export default class MenuBtn extends Phaser.GameObjects.Sprite {
       this.setTexture('btn-menu');
     })
   }
-
-
 }

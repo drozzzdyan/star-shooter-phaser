@@ -17,9 +17,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
   moveToStartPosition() {
     this.scene.tweens.add({
       targets: this,
-      x: 80,
+      x: 120,
       y: this.scene.sys.game.config.height / 2,
-      duration: 1200,
+      duration: 800,
       repeat: 0,
     });
   }
