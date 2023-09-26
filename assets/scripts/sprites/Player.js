@@ -1,5 +1,5 @@
 export default class Player extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, name, frame = 'ship') {
+  constructor(scene, x, y, name, frame = 'player1') {
     super(scene, x, y, name, frame);
     this.scene = scene;
     this.init();
@@ -9,9 +9,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
     this.body.enable = true;
+    this.currentSkinNumber = 1;
+    this.quantitySkins = 5;
     this.velocity = 300;
     this.setInteractive();
-    this.setScale(0.15);
+    this.setScale(0.8);
   }
 
   moveToStartPosition() {
@@ -58,5 +60,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     } else {
       this.body.setVelocityY(0);
     }
+  }
+
+  changeSkin() {
+    this.currentSkinNumber += 1;
+    const textureNumber = this.currentSkinNumber % this.quantitySkins + 1;
+    this.setTexture('player', `player${textureNumber}`);
+    return `player${textureNumber}`;
   }
 }

@@ -6,10 +6,16 @@ export default class StartScene extends Phaser.Scene {
     super('Start');
   }
 
+  init() {
+    this.currentSkin = 'player1';
+  }
+
   create() {
     this.createBackground();
     this.createBtns();
-    new Player(this, this.sys.game.config.width / 2, 150, 'ship');
+    this.player = new Player(this, this.sys.game.config.width / 2, 150, 'player');
+
+    this.input.on('gameobjectdown', this.onPlayerTap, this);
   }
 
   createBackground() {
@@ -21,12 +27,17 @@ export default class StartScene extends Phaser.Scene {
     const midX = this.sys.game.config.width / 2;
     const midY = this.sys.game.config.height / 2;
 
-    this.btnStart = new MenuBtn(this, midX, midY, 'start-btn', 'Start');
-    this.btnInstruction = new MenuBtn(this, midX, midY + 50, 'start-btn', 'Instruction');
-    this.btnInstruction = new MenuBtn(this, midX, midY + 100, 'start-btn', 'Settings');
+    this.btnStart = new MenuBtn(this, midX, midY, 'btn', 'Start');
+    this.btnInstruction = new MenuBtn(this, midX, midY + 50, 'btn', 'Instruction');
+    this.btnInstruction = new MenuBtn(this, midX, midY + 100, 'btn', 'Settings');
 
     this.btnStart.on('pointerdown', () => {
-      this.scene.start('Level1Scene');
+      this.scene.start('Level1Scene', { skin: this.currentSkin });
     })    
+  }
+
+  onPlayerTap(pointer, object) {
+    if (object !== this.player) return;
+    this.currentSkin = object.changeSkin();
   }
 }
