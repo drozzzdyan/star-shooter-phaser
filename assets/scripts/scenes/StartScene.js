@@ -14,7 +14,6 @@ export default class StartScene extends Phaser.Scene {
     this.createBackground();
     this.createBtns();
     this.player = new Player(this, this.sys.game.config.width / 2, 150, 'player');
-
     this.input.on('gameobjectdown', this.onPlayerTap, this);
   }
 

@@ -1,6 +1,6 @@
 export default class Player extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, name, frame = 'player1') {
-    super(scene, x, y, name, frame);
+  constructor(scene, x, y, texture, frame = 'player1') {
+    super(scene, x, y, texture, frame);
     this.scene = scene;
     this.init();
   }

@@ -1,3 +1,5 @@
+import Enemies from "../sprites/Enemies.js";
+import Enemy from "../sprites/Enemy.js";
 import Player from "../sprites/Player.js";
 
 export default class Level1Scene extends Phaser.Scene {
@@ -17,6 +19,11 @@ export default class Level1Scene extends Phaser.Scene {
     this.player.moveToStartPosition();
     this.player.initTouchControll();
     this.player.keyboardControll();
+
+    this.enemies = new Enemies(this);
+    this.enemies.createEnemy(1);
+    this.enemies.createEnemy(2);
+    this.enemies.createEnemy(4);
   }
 
   update() {
