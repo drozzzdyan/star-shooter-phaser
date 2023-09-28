@@ -7,15 +7,14 @@ export default class Level1Scene extends Phaser.Scene {
     super('Level1Scene');
   }
 
-  init(data) {
+  init() {
     this.keyboard = this.input.keyboard.createCursorKeys();
     this.backgroundVelocity = 1;
-    this.skin = data.skin;
   }
 
-  create() {
+  create(data) {
     this.createBackground();
-    this.player = new Player(this, this.sys.game.config.width / 2, 150, 'player', this.skin);
+    this.player = new Player(this, data.startPlayerX, data.startPlayerY, 'player', `player${data.shipType}`);
     this.player.moveToStartPosition();
     this.player.initTouchControll();
     this.player.keyboardControll();
@@ -24,6 +23,17 @@ export default class Level1Scene extends Phaser.Scene {
     this.enemies.createEnemy(1);
     this.enemies.createEnemy(2);
     this.enemies.createEnemy(4);
+
+    this.time.addEvent({
+      delay: 4000,
+      callback: this.clear,
+      callbackScope: this,
+    })
+  }
+
+  clear() {
+    this.enemies.destroy(true, true)
+    console.log(this.enemies)
   }
 
   update() {

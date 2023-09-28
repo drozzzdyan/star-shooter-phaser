@@ -66,6 +66,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.currentSkinNumber += 1;
     const textureNumber = this.currentSkinNumber % this.quantitySkins + 1;
     this.setTexture('player', `player${textureNumber}`);
-    return `player${textureNumber}`;
+    return textureNumber;
   }
 }
