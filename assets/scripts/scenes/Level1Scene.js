@@ -1,3 +1,5 @@
+import shipsConfigs from "../constants/ShipConfigs.js";
+import healthBar from "../classes/healthBar.js";
 import Enemies from "../sprites/Enemies.js";
 import Player from "../sprites/Player.js";
 
@@ -18,16 +20,19 @@ export default class Level1Scene extends Phaser.Scene {
     this.player.initTouchControll();
     this.player.keyboardControll();
 
-    this.enemies = new Enemies(this);
-    this.enemies.createEnemy(1);
-    this.enemies.createEnemy(2);
-    this.enemies.createEnemy(4);
+    const health = shipsConfigs.find(el => el.type === data.shipType).health;
+    this.healthBar = new healthBar(this, health);
 
-    this.time.addEvent({
-      delay: 4000,
-      callback: this.clear,
-      callbackScope: this,
-    })
+    // this.enemies = new Enemies(this);
+    // this.enemies.createEnemy(1);
+    // this.enemies.createEnemy(2);
+    // this.enemies.createEnemy(4);
+
+    // this.time.addEvent({
+    //   delay: 4000,
+    //   callback: this.clear,
+    //   callbackScope: this,
+    // })
   }
 
   clear() {
@@ -43,6 +48,5 @@ export default class Level1Scene extends Phaser.Scene {
   createBackground() {
     this.background = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, 'background');
     this.background.setOrigin(0, 0);
-
   }
 }
