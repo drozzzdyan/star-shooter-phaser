@@ -1,5 +1,5 @@
 export default class MenuBtn extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, name, textInner, frame = 'btn_menu') {
+  constructor(scene, x, y, name, textInner, frame = 'btn') {
     super(scene, x, y, name, frame);
     this.scene = scene;
     this.setInteractive();

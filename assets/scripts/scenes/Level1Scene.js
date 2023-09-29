@@ -1,5 +1,4 @@
 import Enemies from "../sprites/Enemies.js";
-import Enemy from "../sprites/Enemy.js";
 import Player from "../sprites/Player.js";
 
 export default class Level1Scene extends Phaser.Scene {
@@ -14,7 +13,7 @@ export default class Level1Scene extends Phaser.Scene {
 
   create(data) {
     this.createBackground();
-    this.player = new Player(this, data.startPlayerX, data.startPlayerY, 'player', `player${data.shipType}`);
+    this.player = new Player(this, data.startPlayerX, data.startPlayerY, 'player', `player${data.shipType}`, data.shipType);
     this.player.moveToStartPosition();
     this.player.initTouchControll();
     this.player.keyboardControll();

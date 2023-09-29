@@ -21,8 +21,9 @@ export default class StartScene extends Phaser.Scene {
     this.specificationsWindow = new SpecificationsWindow(this);
     this.specificationsWindow.renderText();
     this.specificationsWindow.showSpecificationsWindow(1);
-    
+
     this.input.on('gameobjectdown', this.onPlayerTap, this);
+    this.renderTextHint();
   }
 
   createBackground() {
@@ -36,10 +37,10 @@ export default class StartScene extends Phaser.Scene {
 
     this.btnStart = new MenuBtn(this, midX, midY, 'btn', 'Start');
     this.btnInstruction = new MenuBtn(this, midX, midY + 50, 'btn', 'Instruction');
-    this.btnInstruction = new MenuBtn(this, midX, midY + 100, 'btn', 'Settings');
+    this.btnSettings = new MenuBtn(this, midX, midY + 100, 'btn', 'Settings');
 
     this.btnStart.on('pointerdown', () => {
-      this.scene.start('Level1Scene', { 
+      this.scene.start('Level1Scene', {
         shipType: this.shipType,
         startPlayerX: this.startPlayerX,
         startPlayerY: this.startPlayerY,
@@ -52,5 +53,13 @@ export default class StartScene extends Phaser.Scene {
     this.shipType = object.changeSkin();
     this.specificationsWindow.clear();
     this.specificationsWindow.showSpecificationsWindow(this.shipType);
+  }
+
+  renderTextHint() {
+    this.add.text(this.startPlayerX, this.startPlayerY - 60, 'Tap to switch', {
+      fontFamily: 'Arial',
+      fontSize: '16px',
+      color: '#b755b9',
+    }).setOrigin(0.5)
   }
 }
