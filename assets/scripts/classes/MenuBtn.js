@@ -6,8 +6,8 @@ export default class MenuBtn extends Phaser.GameObjects.Sprite {
     this.scene.add.existing(this); //add the sprite to the stage
 
     scene.add.text(x, y, `${textInner}`, {
-      fontFamily: 'Arial',
-      fontSize: '20px',
+      fontFamily: 'Pixelify Sans',
+      fontSize: '18px',
       color: '#b755b9',
     }).setOrigin(0.5)
 

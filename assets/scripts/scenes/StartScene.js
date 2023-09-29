@@ -57,7 +57,7 @@ export default class StartScene extends Phaser.Scene {
 
   renderTextHint() {
     this.add.text(this.startPlayerX, this.startPlayerY - 60, 'Tap to switch', {
-      fontFamily: 'Arial',
+      fontFamily: 'Pixelify Sans',
       fontSize: '16px',
       color: '#b755b9',
     }).setOrigin(0.5)

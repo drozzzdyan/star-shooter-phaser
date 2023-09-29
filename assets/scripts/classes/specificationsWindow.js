@@ -24,7 +24,7 @@ export default class SpecificationsWindow {
     let indent = 35;
     specifications.forEach(el => {
       this.scene.add.text(this.boxLeftOffset + 10, this.boxTopOffset + indent, el, {
-        fontFamily: 'Arial',
+        fontFamily: 'Pixelify Sans',
         fontSize: '16px',
         color: '#b755b9',
       })
@@ -34,7 +34,7 @@ export default class SpecificationsWindow {
 
   showSpecificationsWindow(shipType = 1) {
     this.box.strokeRect(this.boxLeftOffset, this.boxTopOffset, this.boxWidth, this.boxHeight, this.boxRadius);
-    this.box.lineStyle(2, 0xb755b9, 0.3);
+    this.box.lineStyle(2, 0xb755b9, 1);
 
     let maxHealth = 0;
     let maxSpeed = 0;
@@ -50,7 +50,7 @@ export default class SpecificationsWindow {
 
     const shipConfig = shipsConfigs.find(ship => ship.type === shipType);
     const maxBarWidth = 80;
-    const barColors = [0xff0000, 0x00ff00, 0xff00ff, 0xffff00];
+    const barColors = [0xff0000, 0x6a0fab, 0x0f48ab, 0xad5c05];
     const barValues = [
       shipConfig.health / maxHealth * maxBarWidth,
       shipConfig.speed / maxSpeed * maxBarWidth,

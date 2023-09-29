@@ -24,21 +24,7 @@ export default class Level1Scene extends Phaser.Scene {
     this.healthBar = new healthBar(this, health);
 
     this.enemies = new Enemies(this);
-    this.enemies.createEnemy(11);
-    // this.enemies.createEnemy(2);
-    // this.enemies.createEnemy(4);
-
-    // this.time.addEvent({
-    //   delay: 4000,
-    //   callback: this.clear,
-    //   callbackScope: this,
-    // })
   }
-
-  // clear() {
-  //   this.enemies.destroy(true, true)
-  //   console.log(this.enemies)
-  // }
 
   update() {
     this.player.keyboardControll();
