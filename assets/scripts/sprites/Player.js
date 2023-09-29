@@ -14,7 +14,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.body.enable = true;
     this.quantitySkins = shipsConfigs.length;
     this.currentSkinNumber = 1;
-    this.worldOffset = 35;
+    this.worldOffset = 40;
+    this.worldOffsetTop = 30;
 
     const speedCoefficient = 5;
     const speed = shipsConfigs.find(el => el.type === this.shipType).speed * speedCoefficient;
@@ -36,6 +37,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   initTouchControll() {
     const indent = this.worldOffset;
+    const indentTop = this.worldOffsetTop;
+
     const fingerIndent = 80;
     const correctionFactor = 80000;
     const cursorFollowSpeed = 1 / this.speed * correctionFactor;
@@ -51,7 +54,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     this.scene.input.on('pointermove', pointer => {
       const conditionAsixX = pointer.x > 0 + indent - fingerIndent && pointer.x < this.scene.sys.game.config.width - indent - fingerIndent;
-      const conditionAsixY = pointer.y > 0 + indent && pointer.y < this.scene.sys.game.config.height - indent;
+      const conditionAsixY = pointer.y > 0 + indent + indentTop && pointer.y < this.scene.sys.game.config.height - indent;
 
       if (isTouching && conditionAsixX && conditionAsixY) {
         this.scene.tweens.add({
@@ -67,8 +70,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   keyboardControll() {
     const indent = this.worldOffset;
+    const indentTop = this.worldOffsetTop;
 
-    if (this.scene.keyboard.up.isDown && this.y > indent) {
+    if (this.scene.keyboard.up.isDown && this.y > indent + indentTop) {
       this.body.setVelocityY(-this.speed);
     } else if (this.scene.keyboard.down.isDown && this.y < this.scene.sys.game.config.height - indent) {
       this.body.setVelocityY(this.speed);

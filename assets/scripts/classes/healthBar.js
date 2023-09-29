@@ -1,7 +1,8 @@
 export default class healthBar {
-  constructor(scene, value, positionX = 'left') {
+  constructor(scene, value, position = 'left') {
     this.scene = scene;
     this.value = value;
+    this.position = position;
     this.init()
   }
 
@@ -11,6 +12,10 @@ export default class healthBar {
 
     this.bar = this.scene.add.graphics();
     this.bar.fillStyle(0xff0000, 0.8);
-    this.bar.fillRect(indent, indent + 10, barWidth, 5);
+    if (this.position === 'left') {
+      this.bar.fillRect(indent, indent + 10, barWidth, 5);
+    } else if (this.position === 'right') {
+      this.bar.fillRect(this.scene.sys.game.config.width - barWidth - indent, indent + 10, barWidth, 5);
+    }
   }
 }

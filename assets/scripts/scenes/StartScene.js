@@ -1,4 +1,4 @@
-import MenuBtn from "../sprites/MenuBtn.js";
+import MenuBtn from "../classes/MenuBtn.js";
 import Player from "../sprites/Player.js";
 import SpecificationsWindow from "../classes/specificationsWindow.js";
 

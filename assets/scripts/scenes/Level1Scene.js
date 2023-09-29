@@ -23,8 +23,8 @@ export default class Level1Scene extends Phaser.Scene {
     const health = shipsConfigs.find(el => el.type === data.shipType).health;
     this.healthBar = new healthBar(this, health);
 
-    // this.enemies = new Enemies(this);
-    // this.enemies.createEnemy(1);
+    this.enemies = new Enemies(this);
+    this.enemies.createEnemy(11);
     // this.enemies.createEnemy(2);
     // this.enemies.createEnemy(4);
 
@@ -35,10 +35,10 @@ export default class Level1Scene extends Phaser.Scene {
     // })
   }
 
-  clear() {
-    this.enemies.destroy(true, true)
-    console.log(this.enemies)
-  }
+  // clear() {
+  //   this.enemies.destroy(true, true)
+  //   console.log(this.enemies)
+  // }
 
   update() {
     this.player.keyboardControll();
