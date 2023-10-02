@@ -43,7 +43,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
 
     console.log(positionsY);
     for (let i = 0; i < quantityEnemies; i++) {
-      this.createEnemy(startPositionX + Phaser.Math.Between(-30, 150), positionsY[i], enemyType);
+      this.createEnemy(startPositionX + Phaser.Math.Between(-30, 300), positionsY[i], enemyType);
     }
   }
 

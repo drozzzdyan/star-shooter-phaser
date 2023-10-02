@@ -2,14 +2,14 @@ export default [
   {
     type: 1,
     probability: 0.20,
-    minQuantity: 3,
-    maxQuantity: 10,
+    minQuantity: 6,
+    maxQuantity: 14,
   },
   {
     type: 2,
     probability: 0.13,
-    minQuantity: 2,
-    maxQuantity: 8,
+    minQuantity: 4,
+    maxQuantity: 12,
   },
   {
     type: 3,
