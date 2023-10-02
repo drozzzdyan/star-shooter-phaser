@@ -6,16 +6,15 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.init();
   }
 
-  static generateAttributes(scene) {
-    const x = scene.sys.game.config.width + 30;
-    const y = Phaser.Math.Between(30, scene.sys.game.config.height - 30);
-    const enemyType = Phaser.Math.Between(1, 11);
-    return { x, y, enemyType }
-  }
+  // static generateAttributes(scene) {
+  //   const x = scene.sys.game.config.width + 30;
+  //   const y = Phaser.Math.Between(60, scene.sys.game.config.height - 30);
+  //   return { x, y }
+  // }
 
-  static generate(scene) {
-    const data = Enemy.generateAttributes(scene);
-    return new Enemy(scene, data.x, data.y, 'enemy', data.enemyType);
+  static generate(scene, x, y, enemyType = 11) {
+    // const data = Enemy.generateAttributes(scene);
+    return new Enemy(scene, x, y, 'enemy', enemyType);
   }
 
   init() {
@@ -33,13 +32,13 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.checkWorldBounds();
   }
 
-  reset() {
-    const data = Enemy.generateAttributes(this.scene);
-
-    this.x = data.x;
-    this.y = data.y;
-    this.setFrame(`enemy${data.enemyType}`);
-
+  reset(x, y, enemyType) {
+    // const data = Enemy.generateAttributes(this.scene);
+    // this.x = data.x;
+    // this.y = data.y;
+    this.x = x;
+    this.y = y;
+    this.setFrame(`enemy${enemyType}`);
     this.setAllive(true);
   }
 

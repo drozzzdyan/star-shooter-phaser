@@ -22,13 +22,16 @@ export default class Level1Scene extends Phaser.Scene {
 
     const health = shipsConfigs.find(el => el.type === data.shipType).health;
     this.healthBar = new healthBar(this, health);
-
+    // console.log(this.time.now)
     this.enemies = new Enemies(this);
+    this.enemies.createEnemiesGroup();
   }
 
   update() {
     this.player.keyboardControll();
     this.background.tilePositionX += this.backgroundVelocity;
+    // console.log(this.time.now)
+
   }
 
   createBackground() {

@@ -4,30 +4,74 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
     super();
     this.scene = scene;
+    this.delayEnemyCreate = 8000;
     this.timer = this.scene.time.addEvent({
-      delay: 2400,
+      delay: this.delayEnemyCreate,
       loop: true,
       callback: this.tick,
+      callbackScope: this,
+    })
+
+    this.timerChanger = this.scene.time.addEvent({
+      delay: 8000,
+      loop: true,
+      callback: this.timeChange,
       callbackScope: this,
     })
   }
 
   tick() {
-    this.createEnemy();
+    this.createEnemiesGroup();
   }
 
-  createEnemy() {
-    let enemy = this.getFirstDead();
-
-    console.log(this.getLength())
-
-    if (!enemy) {
-      enemy = Enemy.generate(this.scene);
-      this.add(enemy);
+  timeChange() {
+    if (this.timer.delay > 4000) {
+      this.timer.delay -= 100;
+      console.log(this.timer.delay)
     } else {
-      enemy.reset();
+      this.timerChanger.destroy();
+    }
+  }
+
+  createEnemiesGroup() {
+    const enemyType = Phaser.Math.Between(1, 11);
+    const quantityEnemies = Phaser.Math.Between(1, 5);
+    const startPositionX = this.scene.sys.game.config.width + 50;
+    const positionsY = this.generateRandomPositionsY(quantityEnemies);
+    
+    console.log(positionsY);
+    for (let i = 0; i < quantityEnemies; i++) {
+      this.createEnemy(startPositionX + Phaser.Math.Between(-30, 150), positionsY[i],enemyType);
+    }
+  }
+
+  generateRandomPositionsY(quantity) {
+    const spread = 10;
+    const startY = 90;
+    const endY = this.scene.sys.game.config.height - 20;
+    const differenceY = endY - startY;
+    const stepY = differenceY / quantity;
+
+    let positionsY = [];
+    for (let i = 0; i < quantity; i++) {
+      const positionY = Math.ceil(startY + i * stepY + Phaser.Math.Between(-spread, spread));
+      positionsY.push(positionY);
     }
 
+    return positionsY;
+  }
+
+  createEnemy(x, y, enemyType) {
+    let enemy = this.getFirstDead();
+    console.log(this.getLength());
+
+    if (!enemy) {
+      enemy = Enemy.generate(this.scene, x, y, enemyType);
+      this.add(enemy);
+      enemy.move();
+    } else {
+      enemy.reset(x, y, enemyType);
+    }
     enemy.move();
   }
 }
