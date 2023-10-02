@@ -1,4 +1,5 @@
 import Enemy from "./Enemy.js";
+import enemiesConfigs from "../constants/EnemyConfigs.js";
 
 export default class Enemies extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
@@ -34,15 +35,30 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   }
 
   createEnemiesGroup() {
-    const enemyType = Phaser.Math.Between(1, 11);
-    const quantityEnemies = Phaser.Math.Between(1, 5);
+    const randomEnemy = this.generateRandomEnemy();
+    const enemyType = randomEnemy.type;
+    const quantityEnemies = Phaser.Math.Between(randomEnemy.minQuantity, randomEnemy.maxQuantity);
     const startPositionX = this.scene.sys.game.config.width + 50;
     const positionsY = this.generateRandomPositionsY(quantityEnemies);
-    
+
     console.log(positionsY);
     for (let i = 0; i < quantityEnemies; i++) {
-      this.createEnemy(startPositionX + Phaser.Math.Between(-30, 150), positionsY[i],enemyType);
+      this.createEnemy(startPositionX + Phaser.Math.Between(-30, 150), positionsY[i], enemyType);
     }
+  }
+
+  createEnemy(x, y, enemyType) {
+    let enemy = this.getFirstDead();
+    console.log(this.getLength());
+
+    if (!enemy) {
+      enemy = Enemy.generate(this.scene, x, y, enemyType);
+      this.add(enemy);
+      enemy.move();
+    } else {
+      enemy.reset(x, y, enemyType);
+    }
+    enemy.move();
   }
 
   generateRandomPositionsY(quantity) {
@@ -61,17 +77,18 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     return positionsY;
   }
 
-  createEnemy(x, y, enemyType) {
-    let enemy = this.getFirstDead();
-    console.log(this.getLength());
+  generateRandomEnemy() {
+    const randomValue = Math.random();
+    let cumulativeProbability = 0;
 
-    if (!enemy) {
-      enemy = Enemy.generate(this.scene, x, y, enemyType);
-      this.add(enemy);
-      enemy.move();
-    } else {
-      enemy.reset(x, y, enemyType);
+    for (const enemy of enemiesConfigs) {
+      cumulativeProbability += enemy.probability;
+      if (randomValue <= cumulativeProbability) {
+        return enemy;
+      }
     }
-    enemy.move();
+
+    return null;
   }
+
 }
