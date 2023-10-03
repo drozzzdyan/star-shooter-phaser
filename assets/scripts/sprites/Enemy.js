@@ -6,14 +6,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.init();
   }
 
-  // static generateAttributes(scene) {
-  //   const x = scene.sys.game.config.width + 30;
-  //   const y = Phaser.Math.Between(60, scene.sys.game.config.height - 30);
-  //   return { x, y }
-  // }
-
   static generate(scene, x, y, enemyType = 11) {
-    // const data = Enemy.generateAttributes(scene);
     return new Enemy(scene, x, y, 'enemy', enemyType);
   }
 
@@ -33,9 +26,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   reset(x, y, enemyType) {
-    // const data = Enemy.generateAttributes(this.scene);
-    // this.x = data.x;
-    // this.y = data.y;
     this.x = x;
     this.y = y;
     this.setFrame(`enemy${enemyType}`);

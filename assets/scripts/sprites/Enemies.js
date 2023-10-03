@@ -5,7 +5,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
     super();
     this.scene = scene;
-    this.delayEnemyCreate = 8000;
+    this.delayEnemyCreate = 10000;
     this.timer = this.scene.time.addEvent({
       delay: this.delayEnemyCreate,
       loop: true,
@@ -14,7 +14,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     })
 
     this.timerChanger = this.scene.time.addEvent({
-      delay: 8000,
+      delay: 10000,
       loop: true,
       callback: this.timeChange,
       callbackScope: this,
