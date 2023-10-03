@@ -49,7 +49,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
 
   createEnemy(x, y, enemyType) {
     let enemy = this.getFirstDead();
-    console.log(this.getLength());
+    // console.log(this.getLength());
 
     if (!enemy) {
       enemy = Enemy.generate(this.scene, x, y, enemyType);

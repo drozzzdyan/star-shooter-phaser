@@ -14,8 +14,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
     this.body.enable = true;
-    this.currentSkinNumber = 1;
-    this.quantitySkins = 11;
     this.velocity = 70;
     this.setScale(0.8);
     this.scene.events.on('update', this.update, this);
