@@ -1,7 +1,9 @@
-export default class MenuBtn extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, name, textInner, frame = 'btn') {
-    super(scene, x, y, name, frame);
+export default class Btn extends Phaser.GameObjects.Sprite {
+  constructor(scene, x, y, name, frameStatic, frameActive, textInner) {
+    super(scene, x, y, name, frameStatic);
     this.scene = scene;
+    this.frameStatic = frameStatic;
+    this.frameActive = frameActive;
     this.setInteractive();
     this.scene.add.existing(this); //add the sprite to the stage
 
@@ -12,11 +14,11 @@ export default class MenuBtn extends Phaser.GameObjects.Sprite {
     }).setOrigin(0.5)
 
     this.on('pointerover', () => {
-      this.setTexture('btn', 'btnActive');
+      this.setTexture('btn', this.frameActive);
     })
 
     this.on('pointerout', () => {
-      this.setTexture('btn', 'btn');
+      this.setTexture('btn', this.frameStatic);
     })
   }
 }

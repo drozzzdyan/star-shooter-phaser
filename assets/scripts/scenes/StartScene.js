@@ -1,4 +1,4 @@
-import MenuBtn from "../classes/MenuBtn.js";
+import Btn from "../classes/btn.js";
 import Player from "../sprites/Player.js";
 import SpecificationsWindow from "../classes/specificationsWindow.js";
 
@@ -35,9 +35,9 @@ export default class StartScene extends Phaser.Scene {
     const midX = this.sys.game.config.width / 2;
     const midY = this.sys.game.config.height / 2;
 
-    this.btnStart = new MenuBtn(this, midX, midY, 'btn', 'Start');
-    this.btnInstruction = new MenuBtn(this, midX, midY + 50, 'btn', 'Instruction');
-    this.btnSettings = new MenuBtn(this, midX, midY + 100, 'btn', 'Settings');
+    this.btnStart = new Btn(this, midX, midY, 'btn', 'btn_menu', 'btn_menu_active', 'Start');
+    this.btnInstruction = new Btn(this, midX, midY + 50, 'btn', 'btn_menu', 'btn_menu_active', 'Instruction');
+    this.btnSettings = new Btn(this, midX, midY + 100, 'btn', 'btn_menu', 'btn_menu_active', 'Settings');
 
     this.btnStart.on('pointerdown', () => {
       this.scene.start('Level1Scene', {
