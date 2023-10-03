@@ -1,4 +1,5 @@
 import shipsConfigs from "../constants/ShipConfigs.js";
+import Shots from "./Shots.js";
 
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, texture, frame = 'player1', shipType = 1) {
@@ -9,20 +10,33 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   init() {
+    this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
+    this.draggingPlayer = false;
     this.body.enable = true;
     this.quantitySkins = shipsConfigs.length;
     this.currentSkinNumber = 1;
     this.worldOffset = 40;
     this.worldOffsetTop = 30;
 
+
     const speedCoefficient = 5;
     const speed = shipsConfigs.find(el => el.type === this.shipType).speed * speedCoefficient;
     this.speed = speed;
+    this.cursorFollowSpeed = 1 / this.speed * 80000;
+    this.coursorInit = false;
+    this.fingerIndent = 80;
+    this.scene.input.addPointer(3);
+
+    this.shots = new Shots(this.scene, this);
 
     this.setInteractive();
     this.setScale(0.8);
+  }
+
+  update() {
+    this.touchControll();
   }
 
   moveToStartPosition() {
@@ -32,39 +46,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
       y: this.scene.sys.game.config.height / 2,
       duration: 500,
       repeat: 0,
-    });
-  }
-
-  initTouchControll() {
-    const indent = this.worldOffset;
-    const indentTop = this.worldOffsetTop;
-
-    const fingerIndent = 80;
-    const correctionFactor = 80000;
-    const cursorFollowSpeed = 1 / this.speed * correctionFactor;
-    let isTouching;
-
-    this.scene.input.on('pointerdown', () => {
-      isTouching = true;
-    });
-
-    this.scene.input.on('pointerup', () => {
-      isTouching = false;
-    });
-
-    this.scene.input.on('pointermove', pointer => {
-      const conditionAsixX = pointer.x > 0 + indent - fingerIndent && pointer.x < this.scene.sys.game.config.width - indent - fingerIndent;
-      const conditionAsixY = pointer.y > 0 + indent + indentTop && pointer.y < this.scene.sys.game.config.height - indent;
-
-      if (isTouching && conditionAsixX && conditionAsixY) {
-        this.scene.tweens.add({
-          targets: this,
-          y: pointer.y,
-          x: pointer.x + fingerIndent,
-          duration: cursorFollowSpeed,
-          repeat: 0,
-        });
-      }
     });
   }
 
@@ -86,6 +67,21 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.body.setVelocityX(this.speed);
     } else {
       this.body.setVelocityX(0);
+    }
+  }
+
+  touchControll() {
+    if (this.scene.input.pointer1.isDown && this.coursorInit) {
+      this.scene.tweens.add({
+        targets: this,
+        y: this.scene.input.pointer1.y,
+        x: this.scene.input.pointer1.x + this.fingerIndent,
+        duration: this.cursorFollowSpeed,
+        repeat: 0,
+      });
+    }
+    if (this.scene.input.pointer2.isDown && this.coursorInit) {
+      this.shots.shot();
     }
   }
 

@@ -5,18 +5,17 @@ export default class Shots extends Phaser.Physics.Arcade.Group {
     super();
     this.scene = scene;
     this.player = player;
-    this.delayEnemyCreate = 1000;
-    this.timer = this.scene.time.addEvent({
-      delay: this.delayEnemyCreate,
-      loop: true,
-      callback: this.tick,
-      callbackScope: this,
-    })
+    // this.delayEnemyCreate = 1000;
+    // this.timer = this.scene.time.addEvent({
+    //   delay: this.delayEnemyCreate,
+    //   loop: true,
+    //   callback: this.tick,
+    //   callbackScope: this,
+    // })
   }
 
-  tick() {
+  shot() {
     this.createShot(this.player.x, this.player.y, this.player.shipType);
-    console.log('tick')
   }
 
   createShot(x, y, shotType) {
