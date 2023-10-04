@@ -29,7 +29,7 @@ export default class EnemyShot extends Phaser.GameObjects.Sprite {
   }
 
   checkWorldBounds() {
-    if (this.x > this.scene.sys.game.config.width) {
+    if (this.x < 0) {
       this.setAllive(false);
     }
   }

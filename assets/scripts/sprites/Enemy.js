@@ -1,3 +1,4 @@
+import EnemyConfigs from "../constants/EnemyConfigs.js";
 import EnemyShots from "./EnemyShots.js";
 
 export default class Enemy extends Phaser.GameObjects.Sprite {
@@ -13,6 +14,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   init() {
+    this.enemyConfig = EnemyConfigs.find(el => el.type === this.enemyType);
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
     this.body.enable = true;
@@ -26,8 +28,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
       loop: true,
       callback: () => {
         this.enemyShots.shot(300)
-      },
-      callbackScope: this,
+      }
     })
   }
 
@@ -36,6 +37,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   reset(x, y, enemyType) {
+    this.enemyType = enemyType;
     this.x = x;
     this.y = y;
     this.setFrame(`enemy${enemyType}`);
