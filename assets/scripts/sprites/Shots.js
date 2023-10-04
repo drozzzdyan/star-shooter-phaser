@@ -7,21 +7,24 @@ export default class Shots extends Phaser.Physics.Arcade.Group {
     this.player = player;
   }
 
-  shot() {
-    this.createShot(this.player.x, this.player.y, this.player.shipType);
+  shot(shotSpeed) {
+    const x = this.player.x + this.player.width / 2;
+    const y = this.player.y;
+    const type = this.player.shipType;
+
+    this.createShot(x, y, type, shotSpeed);
   }
 
-  createShot(x, y, shotType) {
+  createShot(x, y, shotType, shotSpeed) {
     let shot = this.getFirstDead();
-    // console.log(this.getLength());
 
     if (!shot) {
       shot = Shot.generate(this.scene, x, y, shotType);
       this.add(shot);
-      shot.move();
+      shot.move(shotSpeed);
     } else {
       shot.reset(x, y, shotType);
     }
-    shot.move();
+    shot.move(shotSpeed);
   }
 }

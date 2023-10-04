@@ -16,7 +16,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
     this.scene.input.addPointer(3);
-
     this.body.enable = true;
     this.quantitySkins = shipsConfigs.length;
     this.currentSkinNumber = 1;
@@ -27,7 +26,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     const speedCoefficient = 5;
     const speed = this.shipConfig.speed * speedCoefficient;
     this.speed = speed;
-    this.cursorFollowSpeed = 1 / this.speed * 80000;
+    const cursorFollowSpeedCoefficient = 80000;
+    this.cursorFollowSpeed = 1 / this.speed * cursorFollowSpeedCoefficient;
     this.coursorInit = false;
     this.fingerIndent = 80;
 
@@ -36,10 +36,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.attackFlagTouch = true;
     this.timeShotFlag = true;
     this.timeShotFlagTouch = true;
-
     const shotDelayCoefficient = 20000;
     this.shotDelay = 1 / this.shipConfig.attackSpeed * shotDelayCoefficient;
-    // console.log(this.shotDelay)
   }
 
   update() {
@@ -81,10 +79,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     if (this.scene.keyboard.space.isDown && this.attackFlag && this.timeShotFlag) {
-      this.shots.shot();
+      this.shots.shot(this.speed);
       this.attackFlag = false;
       this.timeShotFlag = false;
-      // console.log(this.scene.keyboard.space)
     }
     if (this.scene.keyboard.space.isUp && !this.attackFlag) {
       this.attackFlag = true;
@@ -109,7 +106,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
     if (this.scene.input.pointer2.isDown && this.coursorInit && this.attackFlagTouch && this.timeShotFlagTouch) {
-      this.shots.shot();
+      this.shots.shot(this.speed);
       this.attackFlagTouch = false;
       this.timeShotFlagTouch = false;
     }

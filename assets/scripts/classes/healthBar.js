@@ -7,8 +7,8 @@ export default class healthBar {
     this.renderText();
   }
 
-  showHealthBar() {
-    const barWidth = this.value * this.scene.sys.game.config.width / 3 / 100;
+  showHealthBar(value = this.value) {
+    const barWidth = value * this.scene.sys.game.config.width / 3 / 100;
     const indentX = 40;
     const indentY = 28;
 

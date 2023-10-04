@@ -41,7 +41,7 @@ export default class Shot extends Phaser.GameObjects.Sprite {
     this.setVisible(alliveCondition);
   }
 
-  move() {
-    this.body.setVelocityX(this.velocity);
+  move(shotSpeed) {
+    this.body.setVelocityX(shotSpeed);
   }
 }
