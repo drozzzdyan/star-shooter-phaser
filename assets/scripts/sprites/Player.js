@@ -10,29 +10,36 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   init() {
+    this.setInteractive();
+    this.setScale(0.8);
     this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
-    this.draggingPlayer = false;
+    this.scene.input.addPointer(3);
+
     this.body.enable = true;
     this.quantitySkins = shipsConfigs.length;
     this.currentSkinNumber = 1;
     this.worldOffset = 40;
     this.worldOffsetTop = 30;
 
-
+    this.shipConfig = shipsConfigs.find(el => el.type === this.shipType);
     const speedCoefficient = 5;
-    const speed = shipsConfigs.find(el => el.type === this.shipType).speed * speedCoefficient;
+    const speed = this.shipConfig.speed * speedCoefficient;
     this.speed = speed;
     this.cursorFollowSpeed = 1 / this.speed * 80000;
     this.coursorInit = false;
     this.fingerIndent = 80;
-    this.scene.input.addPointer(3);
 
     this.shots = new Shots(this.scene, this);
+    this.attackFlag = true;
+    this.attackFlagTouch = true;
+    this.timeShotFlag = true;
+    this.timeShotFlagTouch = true;
 
-    this.setInteractive();
-    this.setScale(0.8);
+    const shotDelayCoefficient = 20000;
+    this.shotDelay = 1 / this.shipConfig.attackSpeed * shotDelayCoefficient;
+    // console.log(this.shotDelay)
   }
 
   update() {
@@ -42,10 +49,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
   moveToStartPosition() {
     this.scene.tweens.add({
       targets: this,
-      x: 100,
+      x: 90,
       y: this.scene.sys.game.config.height / 2,
-      duration: 500,
+      duration: 800,
       repeat: 0,
+      onComplete: () => {
+        this.coursorInit = true;
+        this.keyboardControll();
+      },
     });
   }
 
@@ -68,6 +79,22 @@ export default class Player extends Phaser.GameObjects.Sprite {
     } else {
       this.body.setVelocityX(0);
     }
+
+    if (this.scene.keyboard.space.isDown && this.attackFlag && this.timeShotFlag) {
+      this.shots.shot();
+      this.attackFlag = false;
+      this.timeShotFlag = false;
+      // console.log(this.scene.keyboard.space)
+    }
+    if (this.scene.keyboard.space.isUp && !this.attackFlag) {
+      this.attackFlag = true;
+      this.scene.time.addEvent({
+        delay: this.shotDelay,
+        callback: () => {
+          this.timeShotFlag = true;
+        },
+      })
+    }
   }
 
   touchControll() {
@@ -80,8 +107,20 @@ export default class Player extends Phaser.GameObjects.Sprite {
         repeat: 0,
       });
     }
-    if (this.scene.input.pointer2.isDown && this.coursorInit) {
+
+    if (this.scene.input.pointer2.isDown && this.coursorInit && this.attackFlagTouch && this.timeShotFlagTouch) {
       this.shots.shot();
+      this.attackFlagTouch = false;
+      this.timeShotFlagTouch = false;
+    }
+    if (!this.scene.input.pointer2.isDown && !this.attackFlagTouch) {
+      this.attackFlagTouch = true;
+      this.scene.time.addEvent({
+        delay: this.shotDelay,
+        callback: () => {
+          this.timeShotFlagTouch = true;
+        },
+      })
     }
   }
 

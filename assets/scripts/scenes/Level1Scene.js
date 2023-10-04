@@ -18,8 +18,6 @@ export default class Level1Scene extends Phaser.Scene {
     this.createBackground();
     this.player = new Player(this, data.startPlayerX, data.startPlayerY, 'player', `player${data.shipType}`, data.shipType);
     this.player.moveToStartPosition();
-    this.player.keyboardControll();
-    this.player.coursorInit = true;
 
     const health = shipsConfigs.find(el => el.type === data.shipType).health;
     this.healthBar = new healthBar(this, health);
