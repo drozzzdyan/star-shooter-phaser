@@ -12,7 +12,9 @@ export default class EnemyShots extends Phaser.Physics.Arcade.Group {
     const y = this.enemy.y;
     const type = this.enemy.enemyType;
 
-    this.createShot(x, y, type, enemyShotSpeed);
+    if (this.enemy.x < this.scene.sys.game.config.width) {
+      this.createShot(x, y, type, enemyShotSpeed);
+    }
   }
 
   createShot(x, y, shotType, enemyShotSpeed) {

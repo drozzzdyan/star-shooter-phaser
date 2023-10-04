@@ -5,7 +5,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
     super();
     this.scene = scene;
-    this.delayEnemyCreate = 10000;
+    this.delayEnemyCreate = 20000;
     this.timer = this.scene.time.addEvent({
       delay: this.delayEnemyCreate,
       loop: true,
@@ -14,7 +14,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     })
 
     this.timerChanger = this.scene.time.addEvent({
-      delay: 10000,
+      delay: this.delayEnemyCreate,
       loop: true,
       callback: this.timeChange,
       callbackScope: this,
@@ -26,8 +26,8 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   }
 
   timeChange() {
-    if (this.timer.delay > 4000) {
-      this.timer.delay -= 100;
+    if (this.timer.delay > 10000) {
+      this.timer.delay -= 300;
     } else {
       this.timerChanger.destroy();
     }
@@ -41,7 +41,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     const positionsY = this.generateRandomPositionsY(quantityEnemies);
 
     for (let i = 0; i < quantityEnemies; i++) {
-      this.createEnemy(startPositionX + Phaser.Math.Between(-30, 300), positionsY[i], enemyType);
+      this.createEnemy(startPositionX + Phaser.Math.Between(-30, 1000), positionsY[i], enemyType);
     }
   }
 

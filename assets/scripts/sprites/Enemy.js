@@ -22,14 +22,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.setScale(0.8);
     this.scene.events.on('update', this.update, this);
     this.enemyShots = new EnemyShots(this.scene, this);
-
-    this.shotsTimer = this.scene.time.addEvent({
-      delay: 1000,
-      loop: true,
-      callback: () => {
-        this.enemyShots.shot(300)
-      }
-    })
+    this.startAttack();
   }
 
   update() {
@@ -58,5 +51,16 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
   move() {
     this.body.setVelocityX(-this.velocity);
+  }
+
+  startAttack() {
+    let randomDelay = Phaser.Math.Between(this.enemyConfig.minAttackDelay, this.enemyConfig.maxAttackDelay);
+    this.shotsTimer = this.scene.time.addEvent({
+      delay: randomDelay,
+      loop: true,
+      callback: () => {
+        this.enemyShots.shot(200);
+      }
+    })
   }
 }
