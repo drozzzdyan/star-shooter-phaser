@@ -44,7 +44,7 @@ export default class SpecificationsWindow {
     shipsConfigs.forEach(el => {
       maxHealth = maxHealth < el.health ? el.health : maxHealth;
       maxSpeed = maxSpeed < el.speed ? el.speed : maxSpeed;
-      maxAttackSpeed = maxAttackSpeed < el.attackSpeed ? el.attackSpeed : maxAttackSpeed;
+      maxAttackSpeed = maxAttackSpeed < 1 / el.shotDelay ? 1 / el.shotDelay : maxAttackSpeed;
       maxDamage = maxDamage < el.damage ? el.damage : maxDamage;
     });
 
@@ -54,7 +54,7 @@ export default class SpecificationsWindow {
     const barValues = [
       shipConfig.health / maxHealth * maxBarWidth,
       shipConfig.speed / maxSpeed * maxBarWidth,
-      shipConfig.attackSpeed / maxAttackSpeed * maxBarWidth,
+      1 / shipConfig.shotDelay / maxAttackSpeed * maxBarWidth,
       shipConfig.damage / maxDamage * maxBarWidth
     ]
 

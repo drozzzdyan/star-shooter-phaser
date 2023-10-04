@@ -36,8 +36,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.attackFlagTouch = true;
     this.timeShotFlag = true;
     this.timeShotFlagTouch = true;
-    const shotDelayCoefficient = 20000;
-    this.shotDelay = 1 / this.shipConfig.attackSpeed * shotDelayCoefficient;
   }
 
   update() {
@@ -86,7 +84,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if (this.scene.keyboard.space.isUp && !this.attackFlag) {
       this.attackFlag = true;
       this.scene.time.addEvent({
-        delay: this.shotDelay,
+        delay: this.shipConfig.shotDelay,
         callback: () => {
           this.timeShotFlag = true;
         },
@@ -113,7 +111,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if (!this.scene.input.pointer2.isDown && !this.attackFlagTouch) {
       this.attackFlagTouch = true;
       this.scene.time.addEvent({
-        delay: this.shotDelay,
+        delay: this.shipConfig.shotDelay,
         callback: () => {
           this.timeShotFlagTouch = true;
         },

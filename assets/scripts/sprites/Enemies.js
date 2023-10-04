@@ -28,7 +28,6 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   timeChange() {
     if (this.timer.delay > 4000) {
       this.timer.delay -= 100;
-      console.log(this.timer.delay)
     } else {
       this.timerChanger.destroy();
     }
@@ -41,7 +40,6 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     const startPositionX = this.scene.sys.game.config.width + 50;
     const positionsY = this.generateRandomPositionsY(quantityEnemies);
 
-    console.log(positionsY);
     for (let i = 0; i < quantityEnemies; i++) {
       this.createEnemy(startPositionX + Phaser.Math.Between(-30, 300), positionsY[i], enemyType);
     }
@@ -49,7 +47,6 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
 
   createEnemy(x, y, enemyType) {
     let enemy = this.getFirstDead();
-    // console.log(this.getLength());
 
     if (!enemy) {
       enemy = Enemy.generate(this.scene, x, y, enemyType);
@@ -90,5 +87,4 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
 
     return null;
   }
-
 }

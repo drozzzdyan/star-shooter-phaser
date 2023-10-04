@@ -1,5 +1,7 @@
+import EnemyShots from "./EnemyShots.js";
+
 export default class Enemy extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture, enemyType = 1) {
+  constructor(scene, x, y, texture, enemyType) {
     super(scene, x, y, texture, `enemy${enemyType}`);
     this.scene = scene;
     this.enemyType = enemyType;
@@ -17,6 +19,16 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.velocity = 70;
     this.setScale(0.8);
     this.scene.events.on('update', this.update, this);
+    this.enemyShots = new EnemyShots(this.scene, this);
+
+    this.shotsTimer = this.scene.time.addEvent({
+      delay: 1000,
+      loop: true,
+      callback: () => {
+        this.enemyShots.shot(300)
+      },
+      callbackScope: this,
+    })
   }
 
   update() {
