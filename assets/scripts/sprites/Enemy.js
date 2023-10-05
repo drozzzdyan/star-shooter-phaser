@@ -50,7 +50,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.setFrame(`enemy${enemyType}`);
     this.setAllive(true);
     this.startAttack();
-    // this.checkOverlaps();
   }
 
   checkWorldBounds() {

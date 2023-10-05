@@ -36,6 +36,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.timeShotFlag = true;
     this.timeShotFlagTouch = true;
     this.playerIsTouch = false;
+
+    this.checkOverlaps();
   }
 
   update() {

@@ -10,7 +10,7 @@ export default class EnemyHealthBar {
 
     this.bar.clear();
     this.bar.fillStyle(0x800b0b, 1);
-    this.bar.fillRect(x - barWidth / 2, y + 40, barWidth, 2);
+    this.bar.fillRect(x - barWidth / 2, y + 30, barWidth, 2);
   }
 
   clear() {
