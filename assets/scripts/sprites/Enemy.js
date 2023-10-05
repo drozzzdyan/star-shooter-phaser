@@ -23,7 +23,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.enemyCurrentHealth = this.enemyConfig.health;
 
     this.body.enable = true;
-    this.speed = 80;
+    this.speed = 100;
     this.setScale(0.8);
 
     this.enemyShots = new EnemyShots(this.scene, this);
@@ -35,17 +35,22 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
   update() {
     this.checkWorldBounds();
-    this.healthBar.follow();
+    if (this.active) {
+      this.healthBar.renderBarTexture(this.x, this.y, this.enemyCurrentHealth, this.enemyConfig.health, this.width);
+    }
   }
 
   reset(x, y, enemyType) {
     this.enemyType = enemyType;
+    this.enemyConfig = EnemyConfigs.find(el => el.type === this.enemyType);
+    this.enemyCurrentHealth = this.enemyConfig.health;
+
     this.x = x;
     this.y = y;
     this.setFrame(`enemy${enemyType}`);
     this.setAllive(true);
     this.startAttack();
-    this.healthBar.renderBarTexture(this.enemyCurrentHealth, this.enemyConfig.health, this.width);
+    // this.checkOverlaps();
   }
 
   checkWorldBounds() {
@@ -58,7 +63,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.body.enable = alliveCondition; // Whether this Body is updated by the physics simulation
     this.setActive(alliveCondition);
     this.setVisible(alliveCondition);
-    this.healthBar.setAllive(alliveCondition);
     if (this.shotsTimer && !alliveCondition) {
       this.shotsTimer.remove();
     }

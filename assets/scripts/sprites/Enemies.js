@@ -6,6 +6,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     super();
     this.scene = scene;
     this.delayEnemyCreate = 20000;
+    // this.delayEnemyCreate = 5000;
     this.timer = this.scene.time.addEvent({
       delay: this.delayEnemyCreate,
       loop: true,
@@ -47,7 +48,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
 
   createEnemy(x, y, enemyType) {
     let enemy = this.getFirstDead();
-
+    // console.log(this)
     if (!enemy) {
       enemy = Enemy.generate(this.scene, x, y, enemyType);
       this.add(enemy);

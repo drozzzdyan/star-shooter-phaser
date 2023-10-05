@@ -146,7 +146,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
       
       source.setAllive(false);
       target.setAllive(false);
+      target.healthBar.clear();
     })
+
     this.scene.physics.add.overlap(this, this.scene.enemies, () => {
       console.log('player bump into enemy')
     })
