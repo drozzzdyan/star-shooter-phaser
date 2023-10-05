@@ -29,13 +29,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
     const cursorFollowSpeedCoefficient = 80000;
     this.cursorFollowSpeed = 1 / this.speed * cursorFollowSpeedCoefficient;
     this.coursorInit = false;
-    this.fingerIndent = 80;
 
     this.shots = new Shots(this.scene, this);
     this.attackFlag = true;
     this.attackFlagTouch = true;
     this.timeShotFlag = true;
     this.timeShotFlagTouch = true;
+    this.playerIsTouch = false;
   }
 
   update() {
@@ -93,11 +93,24 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   touchControll() {
-    if (this.scene.input.pointer1.isDown && this.coursorInit) {
+    const fingerOffsetZone = 100;
+    const fingerIndent = 60;
+    const finderConditionX = Math.abs((this.x - fingerIndent) - this.scene.input.pointer1.x) < fingerOffsetZone;
+    const finderConditionY = Math.abs(this.y - this.scene.input.pointer1.y) < fingerOffsetZone;
+
+    if (this.scene.input.pointer1.isDown && this.coursorInit && !this.playerIsTouch && finderConditionX && finderConditionY) {
+      this.playerIsTouch = true;
+    }
+
+    if (!this.scene.input.pointer1.isDown && this.coursorInit && this.playerIsTouch) {
+      this.playerIsTouch = false;
+    }
+
+    if (this.scene.input.pointer1.isDown && this.coursorInit && this.playerIsTouch) {
       this.scene.tweens.add({
         targets: this,
         y: this.scene.input.pointer1.y,
-        x: this.scene.input.pointer1.x + this.fingerIndent,
+        x: this.scene.input.pointer1.x + fingerIndent,
         duration: this.cursorFollowSpeed,
         repeat: 0,
       });

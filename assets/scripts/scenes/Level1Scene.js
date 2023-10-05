@@ -2,7 +2,6 @@ import shipsConfigs from "../constants/ShipConfigs.js";
 import healthBar from "../classes/healthBar.js";
 import Enemies from "../sprites/Enemies.js";
 import Player from "../sprites/Player.js";
-import Shots from "../sprites/Shots.js";
 
 export default class Level1Scene extends Phaser.Scene {
   constructor() {
