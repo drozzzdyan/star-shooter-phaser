@@ -1,4 +1,4 @@
-import shipsConfigs from "../constants/ShipConfigs.js";
+import shipsConfigs from "../constants/PlayerConfigs.js";
 
 export default class SpecificationsWindow {
   constructor(scene) {

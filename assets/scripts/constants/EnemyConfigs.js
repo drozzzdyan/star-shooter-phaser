@@ -1,6 +1,8 @@
 export default [
   {
     type: 1,
+    health: 10,
+    damage: 5,
     probability: 0.20,
     minQuantity: 6,
     maxQuantity: 14,
@@ -9,6 +11,8 @@ export default [
   },
   {
     type: 2,
+    health: 7,
+    damage: 20,
     probability: 0.13,
     minQuantity: 4,
     maxQuantity: 12,
@@ -17,6 +21,8 @@ export default [
   },
   {
     type: 3,
+    health: 15,
+    damage: 7,
     probability: 0.11,
     minQuantity: 2,
     maxQuantity: 5,
@@ -25,6 +31,8 @@ export default [
   },
   {
     type: 4,
+    health: 15,
+    damage: 8,
     probability: 0.09,
     minQuantity: 2,
     maxQuantity: 5,
@@ -33,6 +41,8 @@ export default [
   },
   {
     type: 5,
+    health: 20,
+    damage: 8,
     probability: 0.09,
     minQuantity: 1,
     maxQuantity: 5,
@@ -41,6 +51,8 @@ export default [
   },
   {
     type: 6,
+    health: 20,
+    damage: 10,
     probability: 0.09,
     minQuantity: 1,
     maxQuantity: 5,
@@ -49,6 +61,8 @@ export default [
   },
   {
     type: 7,
+    health: 30,
+    damage: 10,
     probability: 0.08,
     minQuantity: 1,
     maxQuantity: 5,
@@ -57,6 +71,8 @@ export default [
   },
   {
     type: 8,
+    health: 30,
+    damage: 15,
     probability: 0.07,
     minQuantity: 1,
     maxQuantity: 4,
@@ -65,6 +81,8 @@ export default [
   },
   {
     type: 9,
+    health: 50,
+    damage: 15,
     probability: 0.06,
     minQuantity: 1,
     maxQuantity: 4,
@@ -73,6 +91,8 @@ export default [
   },
   {
     type: 10,
+    health: 50,
+    damage: 20,
     probability: 0.05,
     minQuantity: 2,
     maxQuantity: 3,
@@ -81,6 +101,8 @@ export default [
   },
   {
     type: 11,
+    health: 100,
+    damage: 25,
     probability: 0.03,
     minQuantity: 2,
     maxQuantity: 4,

@@ -19,7 +19,7 @@ export default class EnemyShots extends Phaser.Physics.Arcade.Group {
 
   createShot(x, y, shotType, enemyShotSpeed) {
     let shot = this.getFirstDead();
-    // console.log(this.getLength())
+
     if (!shot) {
       shot = EnemyShot.generate(this.scene, x, y, shotType);
       this.add(shot);

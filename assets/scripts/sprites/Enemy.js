@@ -1,5 +1,6 @@
 import EnemyConfigs from "../constants/EnemyConfigs.js";
 import EnemyShots from "./EnemyShots.js";
+import EnemyHealthBar from "../classes/EnemyHealthBar.js";
 
 export default class Enemy extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, texture, enemyType) {
@@ -14,19 +15,27 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   init() {
-    this.enemyConfig = EnemyConfigs.find(el => el.type === this.enemyType);
-    this.scene.add.existing(this); //add the sprite to the stage
-    this.scene.physics.add.existing(this); //add the sprite to the physics
-    this.body.enable = true;
-    this.velocity = 70;
-    this.setScale(0.8);
+    this.scene.add.existing(this);
+    this.scene.physics.add.existing(this);
     this.scene.events.on('update', this.update, this);
+
+    this.enemyConfig = EnemyConfigs.find(el => el.type === this.enemyType);
+    this.enemyCurrentHealth = this.enemyConfig.health;
+
+    this.body.enable = true;
+    this.speed = 80;
+    this.setScale(0.8);
+
     this.enemyShots = new EnemyShots(this.scene, this);
     this.startAttack();
+    this.checkOverlaps();
+
+    this.healthBar = new EnemyHealthBar(this.scene, this);
   }
 
   update() {
     this.checkWorldBounds();
+    this.healthBar.follow();
   }
 
   reset(x, y, enemyType) {
@@ -35,6 +44,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.y = y;
     this.setFrame(`enemy${enemyType}`);
     this.setAllive(true);
+    this.startAttack();
+    this.healthBar.renderBarTexture(this.enemyCurrentHealth, this.enemyConfig.health, this.width);
   }
 
   checkWorldBounds() {
@@ -47,10 +58,14 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.body.enable = alliveCondition; // Whether this Body is updated by the physics simulation
     this.setActive(alliveCondition);
     this.setVisible(alliveCondition);
+    this.healthBar.setAllive(alliveCondition);
+    if (this.shotsTimer && !alliveCondition) {
+      this.shotsTimer.remove();
+    }
   }
 
   move() {
-    this.body.setVelocityX(-this.velocity);
+    this.body.setVelocityX(-this.speed);
   }
 
   startAttack() {
@@ -61,6 +76,12 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
       callback: () => {
         this.enemyShots.shot(200);
       }
+    })
+  }
+
+  checkOverlaps() {
+    this.scene.physics.add.overlap(this.scene.player, this.enemyShots, () => {
+      console.log('enemy damage player')
     })
   }
 }

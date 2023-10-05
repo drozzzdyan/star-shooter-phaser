@@ -1,4 +1,4 @@
-export default class healthBar {
+export default class PlayerHealthBar {
   constructor(scene, value, position = 'left') {
     this.scene = scene;
     this.value = value;

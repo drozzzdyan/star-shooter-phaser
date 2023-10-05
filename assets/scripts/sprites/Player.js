@@ -1,4 +1,4 @@
-import shipsConfigs from "../constants/ShipConfigs.js";
+import shipsConfigs from "../constants/PlayerConfigs.js";
 import Shots from "./Shots.js";
 
 export default class Player extends Phaser.GameObjects.Sprite {
@@ -40,6 +40,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   update() {
     this.touchControll();
+  }
+
+  changeSkin() {
+    this.currentSkinNumber += 1;
+    const textureNumber = this.currentSkinNumber % this.quantitySkins + 1;
+    this.setTexture('player', `player${textureNumber}`);
+    return textureNumber;
   }
 
   moveToStartPosition() {
@@ -90,7 +97,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   touchControll() {
-    const fingerOffsetZone = 100;
+    const fingerOffsetZone = 80;
     const fingerIndent = 60;
     const fingerConditionX = Math.abs((this.x - fingerIndent) - this.scene.input.pointer1.x) < fingerOffsetZone;
     const fingerConditionY = Math.abs(this.y - this.scene.input.pointer1.y) < fingerOffsetZone;
@@ -133,10 +140,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
   }
 
-  changeSkin() {
-    this.currentSkinNumber += 1;
-    const textureNumber = this.currentSkinNumber % this.quantitySkins + 1;
-    this.setTexture('player', `player${textureNumber}`);
-    return textureNumber;
+  checkOverlaps() {
+    this.scene.physics.add.overlap(this.shots, this.scene.enemies, (source, target) => {
+      console.log('player damage enemy')
+      
+      source.setAllive(false);
+      target.setAllive(false);
+    })
+    this.scene.physics.add.overlap(this, this.scene.enemies, () => {
+      console.log('player bump into enemy')
+    })
   }
 }
