@@ -36,8 +36,8 @@ export default class StartScene extends Phaser.Scene {
     const midY = this.sys.game.config.height / 2;
 
     this.btnStart = new Btn(this, midX, midY, 'btn', 'btn_menu', 'btn_menu_active', 'Start');
-    this.btnInstruction = new Btn(this, midX, midY + 50, 'btn', 'btn_menu', 'btn_menu_active', 'Instruction');
-    this.btnSettings = new Btn(this, midX, midY + 100, 'btn', 'btn_menu', 'btn_menu_active', 'Settings');
+    // this.btnInstruction = new Btn(this, midX, midY + 50, 'btn', 'btn_menu', 'btn_menu_active', 'Instruction');
+    // this.btnSettings = new Btn(this, midX, midY + 100, 'btn', 'btn_menu', 'btn_menu_active', 'Settings');
 
     this.btnStart.on('pointerdown', () => {
       this.scene.start('Level1Scene', {

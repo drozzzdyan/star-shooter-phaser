@@ -2,8 +2,8 @@ import shipsConfigs from "../constants/PlayerConfigs.js";
 import Shots from "./Shots.js";
 
 export default class Player extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture, frame = 'player1', shipType = 1) {
-    super(scene, x, y, texture, frame);
+  constructor(scene, x, y, texture, shipType = 1) {
+    super(scene, x, y, texture, `player${shipType}`);
     this.scene = scene;
     this.shipType = shipType;
     this.init();
@@ -24,6 +24,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.worldOffsetTop = 30;
 
     this.shipConfig = shipsConfigs.find(el => el.type === this.shipType);
+    this.currentHealth = this.shipConfig.health;
     const speedCoefficient = 5;
     const speed = this.shipConfig.speed * speedCoefficient;
     this.speed = speed;
@@ -36,8 +37,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.timeShotFlag = true;
     this.timeShotFlagTouch = true;
     this.playerIsTouch = false;
-
-    this.checkOverlaps();
   }
 
   update() {
@@ -45,9 +44,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   changeSkin() {
-    this.currentSkinNumber += 1;
     const textureNumber = this.currentSkinNumber % this.quantitySkins + 1;
     this.setTexture('player', `player${textureNumber}`);
+    this.currentSkinNumber += 1;
     return textureNumber;
   }
 
@@ -143,16 +142,23 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   checkOverlaps() {
-    this.scene.physics.add.overlap(this.shots, this.scene.enemies, (source, target) => {
-      console.log('player damage enemy')
-      
-      source.setAllive(false);
-      target.setAllive(false);
-      target.healthBar.clear();
-    })
+    this.scene.physics.add.overlap(this.shots, this.scene.enemies, this.playerDamagedEnemy, undefined, this)
+    this.scene.physics.add.overlap(this, this.scene.enemies, this.playerBumpEnemy, undefined, this)
+  }
 
-    this.scene.physics.add.overlap(this, this.scene.enemies, () => {
-      console.log('player bump into enemy')
-    })
+  playerDamagedEnemy(source, target) {
+    console.log('player damage enemy')
+    // console.log(source)
+    // console.log(target)
+
+    target.damaged(source.damage);
+    source.setAllive(false);
+  }
+
+  playerBumpEnemy(source, target) {
+    console.log('player bump into enemy')
+
+    target.setAllive(false);
+    target.healthBar.clear();
   }
 }

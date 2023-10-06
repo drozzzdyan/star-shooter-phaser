@@ -4,13 +4,13 @@ export default class EnemyHealthBar {
     this.bar = this.scene.add.graphics();
   }
 
-  renderBarTexture(x, y, currentHealth, fullHealth, enemyWidth) {
+  renderBarTexture(enemy) {
     const scale = 0.7;
-    const barWidth = currentHealth / fullHealth * enemyWidth * scale;
+    const barWidth = enemy.currentHealth / enemy.enemyConfig.health * enemy.width * scale;
 
     this.bar.clear();
     this.bar.fillStyle(0x800b0b, 1);
-    this.bar.fillRect(x - barWidth / 2, y + 30, barWidth, 2);
+    this.bar.fillRect(enemy.x - barWidth / 2, enemy.y + enemy.height / 2 + 3, barWidth, 2);
   }
 
   clear() {

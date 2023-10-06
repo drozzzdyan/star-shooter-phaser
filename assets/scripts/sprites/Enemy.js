@@ -20,34 +20,42 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.scene.events.on('update', this.update, this);
 
     this.enemyConfig = EnemyConfigs.find(el => el.type === this.enemyType);
-    this.enemyCurrentHealth = this.enemyConfig.health;
+    this.currentHealth = this.enemyConfig.health;
 
     this.body.enable = true;
     this.speed = 100;
-    this.setScale(0.8);
+    // this.setScale(0.8);
 
     this.enemyShots = new EnemyShots(this.scene, this);
     this.startAttack();
     this.checkOverlaps();
 
     this.healthBar = new EnemyHealthBar(this.scene, this);
+
+    // console.log('init', this.texture.customData.meta.size)
+    // console.log('init', this.body)
+    console.log('init', this.width)
+    console.log('init body', this.body.width)
+
+
   }
 
   update() {
     this.checkWorldBounds();
     if (this.active) {
-      this.healthBar.renderBarTexture(this.x, this.y, this.enemyCurrentHealth, this.enemyConfig.health, this.width);
+      this.healthBar.renderBarTexture(this);
     }
   }
 
   reset(x, y, enemyType) {
     this.enemyType = enemyType;
     this.enemyConfig = EnemyConfigs.find(el => el.type === this.enemyType);
-    this.enemyCurrentHealth = this.enemyConfig.health;
+    this.currentHealth = this.enemyConfig.health;
 
     this.x = x;
     this.y = y;
-    this.setFrame(`enemy${enemyType}`);
+    this.setTexture('enemy', `enemy${enemyType}`);
+    this.body.setSize(this.width, this.height);
     this.setAllive(true);
     this.startAttack();
   }
@@ -86,5 +94,13 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.scene.physics.add.overlap(this.scene.player, this.enemyShots, () => {
       console.log('enemy damage player')
     })
+  }
+
+  damaged(damage) {
+    this.currentHealth -= damage;
+    if (this.currentHealth <= 0) {
+      this.setAllive(false);
+      this.healthBar.clear();
+    }
   }
 }

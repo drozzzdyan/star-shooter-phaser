@@ -1,3 +1,5 @@
+import PlayerConfigs from "../constants/PlayerConfigs.js";
+
 export default class Shot extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, texture, shotType = 1) {
     super(scene, x, y, texture, `shot${shotType}`);
@@ -11,11 +13,14 @@ export default class Shot extends Phaser.GameObjects.Sprite {
   }
 
   init() {
+    this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this.body.enable = true;
-    this.velocity = 150;
-    this.scene.events.on('update', this.update, this);
+
+    this.damage = PlayerConfigs.find(el => el.type === this.shotType).damage;
+    // console.log(this.damage)
+    console.log('create', this)
   }
 
   update() {
@@ -23,10 +28,11 @@ export default class Shot extends Phaser.GameObjects.Sprite {
   }
 
   reset(x, y, shotType) {
+    this.setAllive(true);
+    this.setFrame(`shot${shotType}`);
     this.x = x;
     this.y = y;
-    this.setFrame(`shot${shotType}`);
-    this.setAllive(true);
+    console.log('reset', this)
   }
 
   checkWorldBounds() {

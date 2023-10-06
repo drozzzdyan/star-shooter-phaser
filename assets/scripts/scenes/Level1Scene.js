@@ -15,7 +15,7 @@ export default class Level1Scene extends Phaser.Scene {
 
   create(data) {
     this.createBackground();
-    this.player = new Player(this, data.startPlayerX, data.startPlayerY, 'player', `player${data.shipType}`, data.shipType);
+    this.player = new Player(this, data.startPlayerX, data.startPlayerY, 'player', data.shipType);
     this.player.moveToStartPosition();
 
     const health = shipsConfigs.find(el => el.type === data.shipType).health;
