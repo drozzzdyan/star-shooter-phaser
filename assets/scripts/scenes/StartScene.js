@@ -40,7 +40,7 @@ export default class StartScene extends Phaser.Scene {
     // this.btnSettings = new Btn(this, midX, midY + 100, 'btn', 'btn_menu', 'btn_menu_active', 'Settings');
 
     this.btnStart.on('pointerdown', () => {
-      this.scene.start('Level1Scene', {
+      this.scene.start('CutScene1', {
         shipType: this.shipType,
         startPlayerX: this.startPlayerX,
         startPlayerY: this.startPlayerY,
@@ -56,7 +56,7 @@ export default class StartScene extends Phaser.Scene {
   }
 
   renderTextHint() {
-    this.add.text(this.startPlayerX, this.startPlayerY - 60, 'Tap to switch', {
+    this.add.text(this.startPlayerX, this.startPlayerY - 70, 'Tap to switch', {
       fontFamily: 'Pixelify Sans',
       fontSize: '16px',
       color: '#b755b9',

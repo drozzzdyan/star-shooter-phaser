@@ -12,7 +12,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   init() {
     this.setInteractive();
-    this.setScale(0.4);
+    this.setScale(0.5);
     this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
