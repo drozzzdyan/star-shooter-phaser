@@ -52,6 +52,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     return textureNumber;
   }
 
+  setAllive(alliveCondition) {
+    this.body.enable = alliveCondition;
+    this.setActive(alliveCondition);
+    this.setVisible(alliveCondition);
+  }
+
   moveToStartPosition() {
     this.scene.tweens.add({
       targets: this,
@@ -162,7 +168,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   crush(damage) {
     this.currentHealth -= damage;
-    this.currentHealth = this.currentHealth <= 0 ? 0 : this.currentHealth;
+    if (this.currentHealth <= 0) {
+      this.currentHealth = 0;
+      this.setAllive(false);
+    }
     this.healthBar.showHealthBar(this.currentHealth); 
   }
 }

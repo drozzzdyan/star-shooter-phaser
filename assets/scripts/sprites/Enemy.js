@@ -84,8 +84,9 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   checkOverlaps() {
-    this.scene.physics.add.overlap(this.scene.player, this.enemyShots, () => {
-      console.log('enemy damage player')
+    this.scene.physics.add.overlap(this.enemyShots, this.scene.player, (source, target) => {
+      source.crush(target.damage);
+      target.setAllive(false);
     })
   }
 

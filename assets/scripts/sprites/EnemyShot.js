@@ -1,30 +1,34 @@
+import EnemyConfigs from "../constants/EnemyConfigs.js";
+
 export default class EnemyShot extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture, enemyShotType = 1) {
-    super(scene, x, y, texture, `enemyShot${enemyShotType}`);
+  constructor(scene, x, y, texture, shotType = 1) {
+    super(scene, x, y, texture, `enemyShot${shotType}`);
     this.scene = scene;
-    this.enemyShotType = enemyShotType;
+    this.shotType = shotType;
     this.init();
   }
 
-  static generate(scene, x, y, enemyShotType) {
-    return new EnemyShot(scene, x, y, 'enemyShot', enemyShotType);
+  static generate(scene, x, y, shotType) {
+    return new EnemyShot(scene, x, y, 'enemyShot', shotType);
   }
 
   init() {
+    this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this.body.enable = true;
-    this.scene.events.on('update', this.update, this);
+
+    this.damage = EnemyConfigs.find(el => el.type === this.shotType).damage;
   }
 
   update() {
     this.checkWorldBounds();
   }
 
-  reset(x, y, enemyShotType) {
+  reset(x, y, shotType) {
     this.x = x;
     this.y = y;
-    this.setFrame(`enemyShot${enemyShotType}`);
+    this.setFrame(`enemyShot${shotType}`);
     this.setAllive(true);
   }
 

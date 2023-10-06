@@ -19,8 +19,6 @@ export default class Shot extends Phaser.GameObjects.Sprite {
     this.body.enable = true;
 
     this.damage = PlayerConfigs.find(el => el.type === this.shotType).damage;
-    // console.log(this.damage)
-    console.log('create', this)
   }
 
   update() {
