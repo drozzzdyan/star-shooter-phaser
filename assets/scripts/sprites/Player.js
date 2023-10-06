@@ -12,7 +12,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   init() {
     this.setInteractive();
-    this.setScale(0.7);
+    this.setScale(0.4);
     this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
@@ -151,11 +151,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   checkOverlaps() {
-    this.scene.physics.add.overlap(this.shots, this.scene.enemies, this.playerDamagedEnemy, undefined, this)
+    this.scene.physics.add.overlap(this.shots, this.scene.enemies, this.playerDamageEnemy, undefined, this)
     this.scene.physics.add.overlap(this, this.scene.enemies, this.playerBumpEnemy, undefined, this)
   }
 
-  playerDamagedEnemy(source, target) {
+  playerDamageEnemy(source, target) {
     target.damaged(source.damage);
     source.setAllive(false);
   }
