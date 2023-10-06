@@ -30,7 +30,6 @@ export default class Shot extends Phaser.GameObjects.Sprite {
     this.setFrame(`shot${shotType}`);
     this.x = x;
     this.y = y;
-    console.log('reset', this)
   }
 
   checkWorldBounds() {
