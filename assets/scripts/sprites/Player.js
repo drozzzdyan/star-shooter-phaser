@@ -1,4 +1,5 @@
 import shipsConfigs from "../constants/PlayerConfigs.js";
+import PlayerHealthBar from "../classes/PlayerHealthBar.js";
 import Shots from "./Shots.js";
 
 export default class Player extends Phaser.GameObjects.Sprite {
@@ -11,7 +12,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   init() {
     this.setInteractive();
-    this.setScale(0.8);
+    this.setScale(0.7);
     this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
@@ -46,6 +47,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   changeSkin() {
     const textureNumber = this.currentSkinNumber % this.quantitySkins + 1;
     this.setTexture('player', `player${textureNumber}`);
+    this.body.setSize(this.width, this.height);
     this.currentSkinNumber += 1;
     return textureNumber;
   }
@@ -60,6 +62,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       onComplete: () => {
         this.touchControllInit = true;
         this.keyboardControll();
+        this.healthBar = new PlayerHealthBar(this.scene, this.currentHealth);
       },
     });
   }
@@ -147,18 +150,19 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   playerDamagedEnemy(source, target) {
-    console.log('player damage enemy')
-    // console.log(source)
-    // console.log(target)
-
     target.damaged(source.damage);
     source.setAllive(false);
   }
 
   playerBumpEnemy(source, target) {
-    console.log('player bump into enemy')
-
+    this.crush(target.currentHealth);
     target.setAllive(false);
     target.healthBar.clear();
+  }
+
+  crush(damage) {
+    this.currentHealth -= damage;
+    this.currentHealth = this.currentHealth <= 0 ? 0 : this.currentHealth;
+    this.healthBar.showHealthBar(this.currentHealth); 
   }
 }

@@ -3,6 +3,7 @@ export default class PlayerHealthBar {
     this.scene = scene;
     this.value = value;
     this.position = position;
+    this.bar = this.scene.add.graphics();
     this.showHealthBar();
     this.renderText();
   }
@@ -12,7 +13,6 @@ export default class PlayerHealthBar {
     const indentX = 40;
     const indentY = 28;
 
-    this.bar = this.scene.add.graphics();
     this.bar.clear();
     this.bar.fillStyle(0xff0000, 0.8);
     if (this.position === 'left') {

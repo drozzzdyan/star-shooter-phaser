@@ -24,20 +24,13 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
     this.body.enable = true;
     this.speed = 100;
-    // this.setScale(0.8);
+    this.setScale(0.7);
 
     this.enemyShots = new EnemyShots(this.scene, this);
     this.startAttack();
     this.checkOverlaps();
 
     this.healthBar = new EnemyHealthBar(this.scene, this);
-
-    // console.log('init', this.texture.customData.meta.size)
-    // console.log('init', this.body)
-    console.log('init', this.width)
-    console.log('init body', this.body.width)
-
-
   }
 
   update() {

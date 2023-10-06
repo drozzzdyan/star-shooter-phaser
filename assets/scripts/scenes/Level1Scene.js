@@ -1,7 +1,5 @@
-import shipsConfigs from "../constants/PlayerConfigs.js";
 import Enemies from "../sprites/Enemies.js";
 import Player from "../sprites/Player.js";
-import PlayerHealthBar from "../classes/PlayerHealthBar.js";
 
 export default class Level1Scene extends Phaser.Scene {
   constructor() {
@@ -18,8 +16,6 @@ export default class Level1Scene extends Phaser.Scene {
     this.player = new Player(this, data.startPlayerX, data.startPlayerY, 'player', data.shipType);
     this.player.moveToStartPosition();
 
-    const health = shipsConfigs.find(el => el.type === data.shipType).health;
-    this.healthBar = new PlayerHealthBar(this, health);
     this.enemies = new Enemies(this);
     this.enemies.createEnemiesGroup();
     
