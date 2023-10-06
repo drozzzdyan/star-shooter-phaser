@@ -171,6 +171,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     if (this.currentHealth <= 0) {
       this.currentHealth = 0;
       this.setAllive(false);
+      this.touchControllInit = false;
     }
     this.healthBar.showHealthBar(this.currentHealth); 
   }
