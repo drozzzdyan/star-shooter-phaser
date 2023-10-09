@@ -9,7 +9,7 @@ export default class Level1Scene extends Phaser.Scene {
     this.createBackground();
     this.data = data;
     this.player = new Player(this, -100, 200, 'player', data.shipType);
-    this.ally = this.add.sprite(-400, 300, 'ally').setScale(0.5);
+    this.ally = this.add.sprite(-400, this.sys.game.config.height, 'ally').setScale(0.5);
 
     this.showAllianse();
   }
@@ -36,7 +36,7 @@ export default class Level1Scene extends Phaser.Scene {
   }
 
   renderText() {
-    this.add.text(500, 20, 'Protect your ally', {
+    this.add.text(this.sys.game.config.width * 0.7, this.sys.game.config.height / 2, 'Protect your ally', {
       fontFamily: 'Pixelify Sans',
       fontSize: '24px',
       color: '#b755b9',
@@ -48,7 +48,7 @@ export default class Level1Scene extends Phaser.Scene {
         this.tweens.add({
           targets: this.ally,
           x: -400,
-          y: 300,
+          y: this.sys.game.config.height / 2,
           duration: 3000,
           repeat: 0,
           onComplete: () => {
