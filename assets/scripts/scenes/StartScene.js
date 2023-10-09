@@ -14,8 +14,8 @@ export default class StartScene extends Phaser.Scene {
   create() {
     this.createBackground();
     this.createBtns();
-    this.startPlayerX = 320;
-    this.startPlayerY = 105;
+    this.startPlayerX = this.sys.game.config.width / 2 - 100;
+    this.startPlayerY = this.sys.game.config.height / 2 - 120;
 
     this.player = new Player(this, this.startPlayerX, this.startPlayerY, 'player');
     this.specificationsWindow = new SpecificationsWindow(this);
@@ -27,7 +27,7 @@ export default class StartScene extends Phaser.Scene {
   }
 
   createBackground() {
-    this.background = this.add.sprite(0, 0, 'background');
+    this.background = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, 'background');
     this.background.setOrigin(0, 0);
   }
 

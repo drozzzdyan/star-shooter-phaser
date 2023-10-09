@@ -12,7 +12,7 @@ export default class SpecificationsWindow {
     this.boxHeight = 150;
     this.boxRadius = 10;
     this.boxLeftOffset = this.scene.sys.game.config.width / 2;
-    this.boxTopOffset = 30;
+    this.boxTopOffset = this.scene.sys.game.config.height / 2 - this.boxHeight - 50;
   }
 
   clear() {
