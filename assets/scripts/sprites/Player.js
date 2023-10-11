@@ -46,6 +46,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   update() {
     this.touchControll();
+    if (this.currentAllyHealth <= 0 || this.currentHealth <= 0) {
+      this.setAllive(false);
+      this.touchControllInit = false;
+      this.scene.scene.start('EndScene', { score: this.scorePoints });
+    }
   }
 
   changeSkin() {
@@ -70,14 +75,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
       duration: 800,
       repeat: 0,
       onComplete: () => {
-        this.touchControllInit = true;
-        this.keyboardControll();
-        this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);
-        this.allyHealthBar = new PlayerHealthBar(this.scene, 40, this.scene.sys.game.config.height - 28, this.currentAllyHealth, 0x0000ff);
-        this.score = new scoreBar(this.scene, this.scene.sys.game.config.width / 2, 20, this.scorePoints);
-        this.createScoreTimer();
+        this.playerInit();
       },
     });
+  }
+
+  playerInit() {
+    this.touchControllInit = true;
+    this.keyboardControll();
+    this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);
+    this.allyHealthBar = new PlayerHealthBar(this.scene, 40, this.scene.sys.game.config.height - 28, this.currentAllyHealth, 0x0000ff);
+    this.score = new scoreBar(this.scene, this.scene.sys.game.config.width / 2, 15, this.scorePoints);
+    this.createScoreTimer();
   }
 
   keyboardControll() {
@@ -176,6 +185,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   playerDamageEnemy(source, target) {
+    this.scorePoints += target.enemyType;
+    this.score.update(this.scorePoints);
     target.damaged(source.damage);
     source.setAllive(false);
   }
@@ -190,10 +201,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.currentHealth -= damage;
     if (this.currentHealth <= 0) {
       this.currentHealth = 0;
-      this.setAllive(false);
-      this.touchControllInit = false;
     }
-    this.healthBar.showHealthBar(this.currentHealth); 
+    this.healthBar.showHealthBar(this.currentHealth);
   }
 
   allyDamage(damage) {

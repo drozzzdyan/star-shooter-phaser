@@ -10,7 +10,7 @@ export default class scoreBar {
   render() {
     this.scoreText = this.scene.add.text(this.x, this.y, `${this.value}`, {
       fontFamily: 'Pixelify Sans',
-      fontSize: '28px',
+      fontSize: '30px',
       color: '#b755b9',
     })
   }

@@ -2,7 +2,7 @@ import EnemyShot from "./EnemyShot.js";
 
 export default class EnemyShots extends Phaser.Physics.Arcade.Group {
   constructor(scene, enemy) {
-    super();
+    super(scene.physics.world, scene);
     this.scene = scene;
     this.enemy = enemy;
   }

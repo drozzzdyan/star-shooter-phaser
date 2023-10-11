@@ -3,7 +3,7 @@ import enemiesConfigs from "../constants/EnemyConfigs.js";
 
 export default class Enemies extends Phaser.Physics.Arcade.Group {
   constructor(scene) {
-    super();
+    super(scene.physics.world, scene);
     this.scene = scene;
     this.delayEnemyCreate = 17000;
     this.timer = this.scene.time.addEvent({

@@ -2,7 +2,7 @@ import Shot from "./Shot.js";
 
 export default class Shots extends Phaser.Physics.Arcade.Group {
   constructor(scene, player) {
-    super();
+    super(scene.physics.world, scene);
     this.scene = scene;
     this.player = player;
   }
