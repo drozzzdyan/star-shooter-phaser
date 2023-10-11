@@ -1,6 +1,7 @@
 import shipsConfigs from "../constants/PlayerConfigs.js";
 import PlayerHealthBar from "../classes/PlayerHealthBar.js";
 import Shots from "./Shots.js";
+import scoreBar from "../classes/scoreBar.js";
 
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, texture, shipType = 1) {
@@ -22,7 +23,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.quantitySkins = shipsConfigs.length;
     this.currentSkinNumber = 1;
     this.worldOffset = 40;
-    this.worldOffsetTop = 30;
+    this.worldOffsetAdditional = 40;
 
     this.currentAllyHealth = 100;
     this.shipConfig = shipsConfigs.find(el => el.type === this.shipType);
@@ -39,6 +40,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.timeShotFlag = true;
     this.timeShotFlagTouch = true;
     this.playerIsTouch = false;
+
+    this.scorePoints = 0;
   }
 
   update() {
@@ -71,14 +74,16 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.keyboardControll();
         this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);
         this.allyHealthBar = new PlayerHealthBar(this.scene, 40, this.scene.sys.game.config.height - 28, this.currentAllyHealth, 0x0000ff);
+        this.score = new scoreBar(this.scene, this.scene.sys.game.config.width / 2, 20, this.scorePoints);
+        this.createScoreTimer();
       },
     });
   }
 
   keyboardControll() {
-    if (this.scene.keyboard.up.isDown && this.y > this.worldOffset + this.worldOffsetTop) {
+    if (this.scene.keyboard.up.isDown && this.y > this.worldOffset + this.worldOffsetAdditional) {
       this.body.setVelocityY(-this.speed);
-    } else if (this.scene.keyboard.down.isDown && this.y < this.scene.sys.game.config.height - this.worldOffset) {
+    } else if (this.scene.keyboard.down.isDown && this.y < this.scene.sys.game.config.height - (this.worldOffset + this.worldOffsetAdditional)) {
       this.body.setVelocityY(this.speed);
     } else {
       this.body.setVelocityY(0);
@@ -122,9 +127,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.playerIsTouch = false;
     }
 
-    const worldOffsetConditionTop = this.scene.input.pointer1.y > this.worldOffset + this.worldOffsetTop;
-    const worldOffsetConditionBottom = this.scene.input.pointer1.y < this.scene.sys.game.config.height - this.worldOffset;
     const worldOffsetConditionX = Math.abs(this.scene.input.pointer1.x + fingerIndent) < this.scene.sys.game.config.width - this.worldOffset;
+    const worldOffsetConditionTop = this.scene.input.pointer1.y > this.worldOffset + this.worldOffsetAdditional;
+    const worldOffsetConditionBottom = this.scene.input.pointer1.y < this.scene.sys.game.config.height - (this.worldOffset + this.worldOffsetAdditional);
 
     if (this.scene.input.pointer1.isDown && this.touchControllInit && this.playerIsTouch && worldOffsetConditionX && worldOffsetConditionTop && worldOffsetConditionBottom) {
       this.scene.tweens.add({
@@ -141,6 +146,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.attackFlagTouch = false;
       this.timeShotFlagTouch = false;
     }
+
     if (!this.scene.input.pointer2.isDown && !this.attackFlagTouch) {
       this.attackFlagTouch = true;
       this.scene.time.addEvent({
@@ -150,6 +156,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
         },
       })
     }
+  }
+
+  createScoreTimer() {
+    this.scoreTimer = this.scene.time.addEvent({
+      delay: 1000,
+      loop: true,
+      callback: () => {
+        this.scorePoints += 1;
+        this.score.update(this.scorePoints);
+      },
+      // callbackScope: this,
+    })
   }
 
   checkOverlaps() {
@@ -179,11 +197,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   allyDamage(damage) {
-    if (this.currentAllyHealth > 0) {
-      this.currentAllyHealth -= damage;
-    } else {
-      this.currentAllyHealth = 0;
-    }
+    this.currentAllyHealth -= damage
+    this.currentAllyHealth = this.currentAllyHealth < 0 ? 0 : this.currentAllyHealth;
     this.allyHealthBar.showHealthBar(this.currentAllyHealth);
   }
 }
