@@ -4,11 +4,13 @@ import StartScene from "./scenes/StartScene.js";
 import Level1Scene from "./scenes/Level1Scene.js";
 import CutScene1 from "./scenes/CutScene1.js";
 
-let gameFlag = true;
-let game;
+// let gameFlag = true;
+// let game;
 
 const config = {
   type: Phaser.AUTO,
+  width: 800,
+  height: 450,
   scene: [BootScene, PreloadScene, StartScene, CutScene1, Level1Scene],
   physics: {
     default: 'arcade',
@@ -18,18 +20,20 @@ const config = {
   },
 };
 
-checkWindow();
+game = new Phaser.Game(config);
 
-window.addEventListener("resize", () => {
-  checkWindow();
-});
+// checkWindow();
 
-function checkWindow() {
-  if (window.innerWidth > window.innerHeight && gameFlag) {
-    document.querySelector('.modal-rotate').remove();
-    config.width = window.innerWidth;
-    config.height = window.innerHeight;
-    game = new Phaser.Game(config);
-    gameFlag = false;
-  }
-}
+// window.addEventListener("resize", () => {
+//   checkWindow();
+// });
+
+// function checkWindow() {
+//   if (window.innerWidth > window.innerHeight && gameFlag) {
+//     document.querySelector('.modal-rotate').remove();
+//     config.width = window.innerWidth;
+//     config.height = window.innerHeight;
+//     game = new Phaser.Game(config);
+//     gameFlag = false;
+//   }
+// }
