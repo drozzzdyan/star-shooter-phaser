@@ -24,6 +24,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.worldOffset = 40;
     this.worldOffsetTop = 30;
 
+    this.currentAllyHealth = 100;
     this.shipConfig = shipsConfigs.find(el => el.type === this.shipType);
     this.currentHealth = this.shipConfig.health;
     const speedCoefficient = 5;
@@ -69,6 +70,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.touchControllInit = true;
         this.keyboardControll();
         this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);
+        this.allyHealthBar = new PlayerHealthBar(this.scene, 40, this.scene.sys.game.config.height - 28, this.currentAllyHealth, 0x0000ff);
       },
     });
   }
@@ -174,5 +176,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.touchControllInit = false;
     }
     this.healthBar.showHealthBar(this.currentHealth); 
+  }
+
+  allyDamage(damage) {
+    if (this.currentAllyHealth > 0) {
+      this.currentAllyHealth -= damage;
+    } else {
+      this.currentAllyHealth = 0;
+    }
+    this.allyHealthBar.showHealthBar(this.currentAllyHealth);
   }
 }

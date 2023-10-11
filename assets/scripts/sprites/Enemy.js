@@ -55,6 +55,9 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
   checkWorldBounds() {
     if (this.x < -this.width) {
+      if (this.active) {
+        this.scene.player.allyDamage(this.currentHealth);
+      }
       this.setAllive(false);
     }
   }
