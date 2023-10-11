@@ -68,7 +68,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       onComplete: () => {
         this.touchControllInit = true;
         this.keyboardControll();
-        this.healthBar = new PlayerHealthBar(this.scene, this.currentHealth);
+        this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);
       },
     });
   }
