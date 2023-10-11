@@ -4,13 +4,8 @@ import StartScene from "./scenes/StartScene.js";
 import Level1Scene from "./scenes/Level1Scene.js";
 import CutScene1 from "./scenes/CutScene1.js";
 
-// let gameFlag = true;
-// let game;
-
 const config = {
   type: Phaser.AUTO,
-  width: 800,
-  height: 450,
   scene: [BootScene, PreloadScene, StartScene, CutScene1, Level1Scene],
   physics: {
     default: 'arcade',
@@ -20,20 +15,38 @@ const config = {
   },
 };
 
-game = new Phaser.Game(config);
+let game;
+launchGame();
 
-// checkWindow();
+window.addEventListener("resize", () => {
+  if (game) {
+    game.destroy(true);
+  }
+  launchGame();
+});
 
-// window.addEventListener("resize", () => {
-//   checkWindow();
-// });
+function launchGame() {
+  const modal = document.createElement('div');
+  modal.classList.add('modal-rotate');
+  modal.textContent = 'Rotate your device'
 
-// function checkWindow() {
-//   if (window.innerWidth > window.innerHeight && gameFlag) {
-//     document.querySelector('.modal-rotate').remove();
-//     config.width = window.innerWidth;
-//     config.height = window.innerHeight;
-//     game = new Phaser.Game(config);
-//     gameFlag = false;
-//   }
-// }
+  if (!Boolean(document.querySelector('.modal-rotate'))) {
+    document.body.append(modal);
+  }
+
+  if (window.innerHeight > window.innerWidth) {
+    if (!Boolean(document.querySelector('.modal-rotate'))) {
+      document.body.append(modal);
+    }
+  } else {
+    document.querySelector('.modal-rotate').remove();
+    if (window.innerWidth <= 1366) {
+      config.width = window.innerWidth;
+      config.height = window.innerHeight;
+    } else {
+      config.width = 1366;
+      config.height = 768;
+    }
+    game = new Phaser.Game(config);
+  }
+}
