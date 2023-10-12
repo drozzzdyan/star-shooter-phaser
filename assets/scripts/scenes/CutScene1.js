@@ -5,6 +5,10 @@ export default class Level1Scene extends Phaser.Scene {
     super('CutScene1');
   }
 
+  init() {
+    window.removeEventListener('resize');
+  }
+
   create(data) {
     this.createBackground();
     this.data = data;

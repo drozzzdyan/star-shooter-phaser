@@ -17,31 +17,31 @@ const config = {
 };
 
 let game;
+let flagOrientation = true;
 launchGame();
 
 window.addEventListener("resize", () => {
-  if (game) {
-    game.destroy(true);
+  if (flagOrientation) {
+    if (game) {
+      game.destroy(true);
+    }
+    launchGame();
+    flagOrientation = false;
   }
-  launchGame();
+  if (window.innerHeight > window.innerWidth) {
+    createOrientationModal();
+  } else {
+    removeOrientationModal();
+  }
 });
 
 function launchGame() {
-  const modal = document.createElement('div');
-  modal.classList.add('modal-rotate');
-  modal.textContent = 'Rotate your device'
-
-  if (!Boolean(document.querySelector('.modal-rotate'))) {
-    document.body.append(modal);
-  }
-
+  createOrientationModal()
   if (window.innerHeight > window.innerWidth) {
-    if (!Boolean(document.querySelector('.modal-rotate'))) {
-      document.body.append(modal);
-    }
+    createOrientationModal();
   } else {
-    document.querySelector('.modal-rotate').remove();
-    if (window.innerWidth <= 1366) {
+    removeOrientationModal();
+    if (window.innerWidth <= 1920) {
       config.width = window.innerWidth;
       config.height = window.innerHeight;
     } else {
@@ -49,5 +49,21 @@ function launchGame() {
       config.height = 768;
     }
     game = new Phaser.Game(config);
+  }
+}
+
+function createOrientationModal() {
+  const modal = document.createElement('div');
+  modal.classList.add('modal-rotate');
+  modal.textContent = 'Rotate your device'
+
+  if (!Boolean(document.querySelector('.modal-rotate'))) {
+    document.body.append(modal);
+  }
+}
+
+function removeOrientationModal() {
+  if (Boolean(document.querySelector('.modal-rotate'))) {
+    document.querySelector('.modal-rotate').remove();
   }
 }
