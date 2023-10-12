@@ -14,7 +14,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
   init() {
     this.setInteractive();
     this.setScale(0.5);
-    this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this); //add the sprite to the stage
     this.scene.physics.add.existing(this); //add the sprite to the physics
     this.scene.input.addPointer(3);
@@ -42,13 +41,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.playerIsTouch = false;
 
     this.scorePoints = 0;
+
+    this.scene.events.on('update', this.update, this);
+    console.log(this.scene, this);
   }
 
   update() {
-    this.touchControll();
+    if (this.touchControllInit) {
+      this.touchControll();
+    }
     if (this.currentAllyHealth <= 0 || this.currentHealth <= 0) {
       this.setAllive(false);
-      this.touchControllInit = false;
+      this.scene.events.off('update', this.update, this);
       this.scene.scene.start('EndScene', { score: this.scorePoints });
     }
   }
@@ -63,6 +67,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   setAllive(alliveCondition) {
     this.body.enable = alliveCondition;
+    this.touchControllInit = alliveCondition;
     this.setActive(alliveCondition);
     this.setVisible(alliveCondition);
   }
@@ -76,12 +81,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
       repeat: 0,
       onComplete: () => {
         this.playerInit();
+        // this.scene.scene.start('EndScene', { score: this.scorePoints });
       },
     });
   }
 
   playerInit() {
-    this.touchControllInit = true;
+    // this.touchControllInit = true;
+    this.setAllive(true);
     this.keyboardControll();
     this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);
     this.allyHealthBar = new PlayerHealthBar(this.scene, 40, this.scene.sys.game.config.height - 28, this.currentAllyHealth, 0x0000ff);
@@ -175,7 +182,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scorePoints += 1;
         this.score.update(this.scorePoints);
       },
-      // callbackScope: this,
     })
   }
 

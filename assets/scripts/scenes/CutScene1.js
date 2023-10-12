@@ -1,12 +1,8 @@
 import Player from "../sprites/Player.js";
 
-export default class Level1Scene extends Phaser.Scene {
+export default class CutScene1 extends Phaser.Scene {
   constructor() {
     super('CutScene1');
-  }
-
-  init() {
-    window.removeEventListener('resize');
   }
 
   create(data) {
