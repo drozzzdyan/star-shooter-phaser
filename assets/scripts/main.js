@@ -37,12 +37,12 @@ function launchGame() {
     createOrientationModal();
   } else {
     removeOrientationModal();
-    if (window.innerWidth <= 1366) {
+    if (window.innerWidth <= 1024) {
       config.width = window.innerWidth;
       config.height = window.innerHeight;
     } else {
-      config.width = 1366;
-      config.height = 768;
+      config.width = 1024;
+      config.height = 600;
     }
     game = new Phaser.Game(config);
   }

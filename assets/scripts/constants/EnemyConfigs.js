@@ -7,7 +7,7 @@ export default [
     minQuantity: 6,
     maxQuantity: 14,
     minAttackDelay: 1300,
-    maxAttackDelay: 2000,
+    maxAttackDelay: 4000,
   },
   {
     type: 2,
@@ -17,7 +17,7 @@ export default [
     minQuantity: 4,
     maxQuantity: 12,
     minAttackDelay: 1400,
-    maxAttackDelay: 2500,
+    maxAttackDelay: 3500,
   },
   {
     type: 3,
