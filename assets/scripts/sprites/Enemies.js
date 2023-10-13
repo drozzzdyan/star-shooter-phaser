@@ -41,20 +41,22 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
     const positionsY = this.generateRandomPositionsY(quantityEnemies);
 
     for (let i = 0; i < quantityEnemies; i++) {
-      this.createEnemy(startPositionX + Phaser.Math.Between(0, 1200), positionsY[i], enemyType);
+      let positionX = startPositionX + Phaser.Math.Between(0, 1500);
+      let speed = Phaser.Math.Between(randomEnemy.minSpeed, randomEnemy.maxSpeed);
+      this.createEnemy(positionX, positionsY[i], enemyType, speed);
     }
   }
 
-  createEnemy(x, y, enemyType) {
+  createEnemy(x, y, enemyType, speed) {
     let enemy = this.getFirstDead();
 
 
     if (!enemy) {
-      enemy = Enemy.generate(this.scene, x, y, enemyType);
+      enemy = Enemy.generate(this.scene, x, y, enemyType, speed);
       this.add(enemy);
       enemy.move();
     } else {
-      enemy.reset(x, y, enemyType);
+      enemy.reset(x, y, enemyType, speed);
     }
     enemy.move();
   }

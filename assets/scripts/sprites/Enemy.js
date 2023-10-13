@@ -3,15 +3,16 @@ import EnemyShots from "./EnemyShots.js";
 import EnemyHealthBar from "../classes/EnemyHealthBar.js";
 
 export default class Enemy extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, texture, enemyType) {
+  constructor(scene, x, y, texture, enemyType, speed) {
     super(scene, x, y, texture, `enemy${enemyType}`);
     this.scene = scene;
     this.enemyType = enemyType;
+    this.speed = speed;
     this.init();
   }
 
-  static generate(scene, x, y, enemyType = 11) {
-    return new Enemy(scene, x, y, 'enemy', enemyType);
+  static generate(scene, x, y, enemyType = 11, speed) {
+    return new Enemy(scene, x, y, 'enemy', enemyType, speed);
   }
 
   init() {
@@ -22,7 +23,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.currentHealth = this.enemyConfig.health;
 
     this.body.enable = true;
-    this.speed = 100;
     this.setScale(0.7);
 
     this.enemyShots = new EnemyShots(this.scene, this);
@@ -44,10 +44,11 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     }
   }
 
-  reset(x, y, enemyType) {
+  reset(x, y, enemyType, speed) {
     this.enemyType = enemyType;
     this.enemyConfig = EnemyConfigs.find(el => el.type === this.enemyType);
     this.currentHealth = this.enemyConfig.health;
+    this.speed = speed;
 
     this.x = x;
     this.y = y;
@@ -85,7 +86,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
       delay: randomDelay,
       loop: true,
       callback: () => {
-        this.enemyShots.shot(200);
+        this.enemyShots.shot(this.speed + 120);
       }
     })
   }

@@ -8,6 +8,8 @@ export default [
     maxQuantity: 15,
     minAttackDelay: 2000,
     maxAttackDelay: 5500,
+    minSpeed: 80,
+    maxSpeed: 200,
   },
   {
     type: 2,
@@ -18,6 +20,8 @@ export default [
     maxQuantity: 15,
     minAttackDelay: 2000,
     maxAttackDelay: 4500,
+    minSpeed: 100,
+    maxSpeed: 200,
   },
   {
     type: 3,
@@ -28,6 +32,8 @@ export default [
     maxQuantity: 9,
     minAttackDelay: 1500,
     maxAttackDelay: 4000,
+    minSpeed: 70,
+    maxSpeed: 150,
   },
   {
     type: 4,
@@ -38,6 +44,8 @@ export default [
     maxQuantity: 8,
     minAttackDelay: 1600,
     maxAttackDelay: 4000,
+    minSpeed: 70,
+    maxSpeed: 170,
   },
   {
     type: 5,
@@ -48,6 +56,8 @@ export default [
     maxQuantity: 7,
     minAttackDelay: 1800,
     maxAttackDelay: 4500,
+    minSpeed: 80,
+    maxSpeed: 180,
   },
   {
     type: 6,
@@ -58,6 +68,8 @@ export default [
     maxQuantity: 9,
     minAttackDelay: 2000,
     maxAttackDelay: 5000,
+    minSpeed: 80,
+    maxSpeed: 150,
   },
   {
     type: 7,
@@ -68,6 +80,8 @@ export default [
     maxQuantity: 8,
     minAttackDelay: 2000,
     maxAttackDelay: 6500,
+    minSpeed: 50,
+    maxSpeed: 160,
   },
   {
     type: 8,
@@ -75,9 +89,11 @@ export default [
     damage: 15,
     probability: 0.07,
     minQuantity: 1,
-    maxQuantity: 4,
+    maxQuantity: 5,
     minAttackDelay: 2000,
     maxAttackDelay: 5000,
+    minSpeed: 40,
+    maxSpeed: 150,
   },
   {
     type: 9,
@@ -85,9 +101,11 @@ export default [
     damage: 15,
     probability: 0.06,
     minQuantity: 1,
-    maxQuantity: 4,
+    maxQuantity: 5,
     minAttackDelay: 2300,
     maxAttackDelay: 4500,
+    minSpeed: 40,
+    maxSpeed: 200,
   },
   {
     type: 10,
@@ -95,9 +113,11 @@ export default [
     damage: 20,
     probability: 0.05,
     minQuantity: 2,
-    maxQuantity: 3,
+    maxQuantity: 7,
     minAttackDelay: 2500,
     maxAttackDelay: 5000,
+    minSpeed: 50,
+    maxSpeed: 120,
   },
   {
     type: 11,
@@ -105,8 +125,10 @@ export default [
     damage: 25,
     probability: 0.03,
     minQuantity: 2,
-    maxQuantity: 4,
+    maxQuantity: 6,
     minAttackDelay: 1500,
     maxAttackDelay: 5000,
+    minSpeed: 30,
+    maxSpeed: 120,
   },
 ]
