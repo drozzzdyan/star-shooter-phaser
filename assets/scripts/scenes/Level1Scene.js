@@ -9,6 +9,13 @@ export default class Level1Scene extends Phaser.Scene {
   init() {
     this.keyboard = this.input.keyboard.createCursorKeys();
     this.backgroundVelocity = 1;
+
+    this.timer = this.time.addEvent({
+      delay: 1000,
+      loop: true,
+      callback: this.tick,
+      callbackScope: this,
+    })
   }
 
   create(data) {
@@ -20,6 +27,10 @@ export default class Level1Scene extends Phaser.Scene {
     this.enemies.createEnemiesGroup();
     
     this.player.checkOverlaps();
+  }
+
+  tick() {
+    this.backgroundVelocity += 0.01;
   }
 
   update() {

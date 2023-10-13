@@ -2,39 +2,39 @@
 
 {
 	"filename": "enemyShot1",
-	"frame": {"x":1,"y":1,"w":6,"h":2},
+	"frame": {"x":1,"y":1,"w":7,"h":3},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":6,"h":2},
-	"sourceSize": {"w":6,"h":2}
+	"spriteSourceSize": {"x":0,"y":0,"w":7,"h":3},
+	"sourceSize": {"w":7,"h":3}
 },
 {
 	"filename": "enemyShot2",
-	"frame": {"x":8,"y":1,"w":6,"h":2},
+	"frame": {"x":9,"y":1,"w":8,"h":3},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":6,"h":2},
-	"sourceSize": {"w":6,"h":2}
+	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":3},
+	"sourceSize": {"w":8,"h":3}
 },
 {
 	"filename": "enemyShot3",
-	"frame": {"x":15,"y":1,"w":9,"h":2},
+	"frame": {"x":14,"y":5,"w":11,"h":4},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":9,"h":2},
-	"sourceSize": {"w":9,"h":2}
+	"spriteSourceSize": {"x":0,"y":0,"w":11,"h":4},
+	"sourceSize": {"w":11,"h":4}
 },
 {
 	"filename": "enemyShot4",
-	"frame": {"x":1,"y":4,"w":9,"h":2},
+	"frame": {"x":1,"y":5,"w":12,"h":3},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":9,"h":2},
-	"sourceSize": {"w":9,"h":2}
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":3},
+	"sourceSize": {"w":12,"h":3}
 },
 {
 	"filename": "enemyShot5",
-	"frame": {"x":17,"y":9,"w":8,"h":8},
+	"frame": {"x":1,"y":16,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
@@ -42,7 +42,7 @@
 },
 {
 	"filename": "enemyShot6",
-	"frame": {"x":1,"y":18,"w":8,"h":8},
+	"frame": {"x":10,"y":16,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
@@ -50,7 +50,7 @@
 },
 {
 	"filename": "enemyShot7",
-	"frame": {"x":11,"y":4,"w":12,"h":4},
+	"frame": {"x":1,"y":10,"w":12,"h":4},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":4},
@@ -58,7 +58,7 @@
 },
 {
 	"filename": "enemyShot8",
-	"frame": {"x":10,"y":18,"w":9,"h":8},
+	"frame": {"x":19,"y":16,"w":9,"h":8},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":9,"h":8},
@@ -66,7 +66,7 @@
 },
 {
 	"filename": "enemyShot9",
-	"frame": {"x":1,"y":9,"w":15,"h":5},
+	"frame": {"x":14,"y":10,"w":15,"h":5},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":5},
@@ -74,7 +74,7 @@
 },
 {
 	"filename": "enemyShot10",
-	"frame": {"x":1,"y":27,"w":11,"h":8},
+	"frame": {"x":1,"y":25,"w":11,"h":8},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":11,"h":8},
@@ -82,7 +82,7 @@
 },
 {
 	"filename": "enemyShot11",
-	"frame": {"x":13,"y":27,"w":12,"h":12},
+	"frame": {"x":13,"y":25,"w":12,"h":12},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
@@ -91,10 +91,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "enemyShots.png",
+	"image": "enemyShot.png",
 	"format": "RGBA8888",
-	"size": {"w":26,"h":40},
+	"size": {"w":30,"h":38},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:331b2a03d7db2494e19d3a01a7eedf05:c83e7e621fb0feba2ff0de9c67f981e7:a1e5773738bd9532016f760531aa6a21$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8b2878f3df5513078142916984cb9efd:05a99e203ac459861cefaf6f49dc405d:217a57af7876d1abb529dca77fc0e2cd$"
 }
 }

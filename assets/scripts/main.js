@@ -16,6 +16,8 @@ const config = {
   },
 };
 
+const gameWidth = 1024;
+const gameHeight = 576;
 let game;
 launchGame();
 
@@ -37,12 +39,12 @@ function launchGame() {
     createOrientationModal();
   } else {
     removeOrientationModal();
-    if (window.innerWidth <= 1024) {
+    if (window.innerWidth <= gameWidth) {
       config.width = window.innerWidth;
       config.height = window.innerHeight;
     } else {
-      config.width = 1024;
-      config.height = 600;
+      config.width = gameWidth;
+      config.height = gameHeight;
     }
     game = new Phaser.Game(config);
   }
