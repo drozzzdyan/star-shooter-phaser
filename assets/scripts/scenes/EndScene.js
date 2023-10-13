@@ -14,7 +14,6 @@ export default class EndScene extends Phaser.Scene {
       delay: 3000,
       callback: () => {
         this.scene.start('Start');
-        console.log(this)
       },
     })
   }

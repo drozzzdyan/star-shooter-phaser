@@ -17,7 +17,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   init() {
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
-    this.scene.events.on('update', this.update, this);
 
     this.enemyConfig = EnemyConfigs.find(el => el.type === this.enemyType);
     this.currentHealth = this.enemyConfig.health;
@@ -31,6 +30,11 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.checkOverlaps();
 
     this.healthBar = new EnemyHealthBar(this.scene, this);
+    
+    this.scene.events.on('update', this.update, this);
+    this.scene.events.once('lose', () => {
+      this.scene.events.off('update', this.update, this);
+    })
   }
 
   update() {

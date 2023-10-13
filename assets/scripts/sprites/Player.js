@@ -43,17 +43,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scorePoints = 0;
 
     this.scene.events.on('update', this.update, this);
-    console.log(this.scene, this);
   }
 
   update() {
     if (this.touchControllInit) {
       this.touchControll();
-    }
-    if (this.currentAllyHealth <= 0 || this.currentHealth <= 0) {
-      this.setAllive(false);
-      this.scene.events.off('update', this.update, this);
-      this.scene.scene.start('EndScene', { score: this.scorePoints });
     }
   }
 
@@ -81,13 +75,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
       repeat: 0,
       onComplete: () => {
         this.playerInit();
-        // this.scene.scene.start('EndScene', { score: this.scorePoints });
       },
     });
   }
 
   playerInit() {
-    // this.touchControllInit = true;
     this.setAllive(true);
     this.keyboardControll();
     this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);

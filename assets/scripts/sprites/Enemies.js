@@ -55,7 +55,6 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
       enemy.move();
     } else {
       enemy.reset(x, y, enemyType);
-      // console.log(this)
     }
     enemy.move();
   }

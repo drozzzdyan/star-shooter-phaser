@@ -24,7 +24,17 @@ export default class Level1Scene extends Phaser.Scene {
 
   update() {
     this.player.keyboardControll();
+    this.checkPlayerLose();
     this.background.tilePositionX += this.backgroundVelocity;
+  }
+
+  checkPlayerLose() {
+    if (this.player.currentAllyHealth <= 0 || this.player.currentHealth <= 0) {
+      this.player.setAllive(false);
+      this.events.emit('lose');
+      this.enemies.clear(true, true);
+      this.scene.start('EndScene', { score: this.player.scorePoints });
+    }
   }
 
   createBackground() {

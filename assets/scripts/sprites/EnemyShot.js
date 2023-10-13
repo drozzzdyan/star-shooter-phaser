@@ -13,12 +13,16 @@ export default class EnemyShot extends Phaser.GameObjects.Sprite {
   }
 
   init() {
-    this.scene.events.on('update', this.update, this);
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this.body.enable = true;
 
     this.damage = EnemyConfigs.find(el => el.type === this.shotType).damage;
+
+    this.scene.events.on('update', this.update, this);
+    this.scene.events.once('lose', () => {
+      this.scene.events.off('update', this.update, this);
+    })
   }
 
   update() {
