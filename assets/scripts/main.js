@@ -17,17 +17,13 @@ const config = {
 };
 
 let game;
-let flagOrientation = true;
 launchGame();
 
 window.addEventListener("resize", () => {
-  if (flagOrientation) {
-    if (game) {
-      game.destroy(true);
-    }
-    launchGame();
-    flagOrientation = false;
+  if (game) {
+    game.destroy(true);
   }
+  launchGame();
   if (window.innerHeight > window.innerWidth) {
     createOrientationModal();
   } else {
@@ -41,7 +37,7 @@ function launchGame() {
     createOrientationModal();
   } else {
     removeOrientationModal();
-    if (window.innerWidth <= 1920) {
+    if (window.innerWidth <= 1366) {
       config.width = window.innerWidth;
       config.height = window.innerHeight;
     } else {
