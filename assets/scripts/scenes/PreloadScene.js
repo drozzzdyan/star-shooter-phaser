@@ -1,9 +1,17 @@
+import ProgressBar from "../classes/progressBar.js";
+
 export default class PreloadScene extends Phaser.Scene {
   constructor() {
     super('Preload');
   }
 
   preload() {
+    this.createBackground();
+    this.progressBar = new ProgressBar(this);
+    this.preloadAssets();
+  }
+
+  preloadAssets() {
     this.load.image('ally', 'assets/sprites/ally.png', 'assets/sprites/ally.json');
     this.load.atlas('player', 'assets/sprites/player.png', 'assets/sprites/player.json');
     this.load.atlas('enemy', 'assets/sprites/enemy.png', 'assets/sprites/enemy.json');
@@ -14,5 +22,10 @@ export default class PreloadScene extends Phaser.Scene {
 
   create() {
     this.scene.start('Start');
+  }
+
+  createBackground() {
+    this.background = this.add.tileSprite(0, 0, this.sys.game.config.width, this.sys.game.config.height, 'background');
+    this.background.setOrigin(0, 0);
   }
 }
