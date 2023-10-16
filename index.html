@@ -4,16 +4,41 @@
 <head>
   <meta charset="UTF-8" />
   <title>Start Shooter</title>
+  <link rel="stylesheet" href="loader.css">
+
+  <script>
+    window.onload = () => {
+      const loader = document.querySelector('.loader')
+      const loaderCircles = document.querySelectorAll('.loader__circle')
+      loader.classList.add('loader-hide')
+      loaderCircles.forEach(el => el.classList.add('loader__circles-hide'));
+      const timeout = setTimeout(() => {
+        loader.classList.add('loader-off')
+        document.body.classList.remove('stop-scroll')
+        clearTimeout(timeout)
+      }, 1000)
+    }
+  </script>
+
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
-  <script src="assets/scripts/libs/phaser.js"></script>
-  <script type="module" src="assets/scripts/main.js"></script>
+  <script defer src="assets/scripts/libs/phaser.js"></script>
+  <script defer type="module" src="assets/scripts/main.js"></script>
 </head>
 
 <body>
-
+  <div class="loader">
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+  </div>
 </body>
 
 </html>
