@@ -19,7 +19,7 @@ export default class CutScene1 extends Phaser.Scene {
       targets: this.player,
       x: this.data.startPlayerX,
       y: this.data.startPlayerY,
-      duration: 3000,
+      duration: 1500,
       repeat: 0,
     });
 
@@ -27,7 +27,7 @@ export default class CutScene1 extends Phaser.Scene {
       targets: this.ally,
       x: 200,
       y: 300,
-      duration: 3000,
+      duration: 1500,
       repeat: 0,
       onComplete: () => {
         this.renderText();
@@ -36,6 +36,14 @@ export default class CutScene1 extends Phaser.Scene {
   }
 
   renderText() {
+    this.input.on('pointerdown', () => {
+      this.scene.start('Level1Scene', this.data);
+    });
+
+    this.input.keyboard.on('keydown-SPACE', (event) => {
+      this.scene.start('Level1Scene', this.data);
+    });
+
     this.add.text(this.sys.game.config.width * 0.7, this.sys.game.config.height / 2, 'Protect your ally', {
       fontFamily: 'Pixelify Sans',
       fontSize: '24px',

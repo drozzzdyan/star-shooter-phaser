@@ -40,8 +40,8 @@ export default class StartScene extends Phaser.Scene {
     // this.btnSettings = new Btn(this, midX, midY + 100, 'btn', 'btn_menu', 'btn_menu_active', 'Settings');
 
     this.btnStart.on('pointerdown', () => {
-      // this.scene.start('CutScene1', {
-      this.scene.start('Level1Scene', {
+      this.scene.start('CutScene1', {
+      // this.scene.start('Level1Scene', {
         shipType: this.shipType,
         startPlayerX: this.startPlayerX,
         startPlayerY: this.startPlayerY,
