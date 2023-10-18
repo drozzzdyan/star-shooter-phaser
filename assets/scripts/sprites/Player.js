@@ -41,6 +41,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.playerIsTouch = false;
 
     this.scorePoints = 0;
+    this.multiplyBonus = 1;
 
     this.scene.events.on('update', this.update, this);
   }
@@ -84,7 +85,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.keyboardControll();
     this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);
     this.allyHealthBar = new PlayerHealthBar(this.scene, 40, this.scene.sys.game.config.height - 28, this.currentAllyHealth, 0x0000ff);
-    this.score = new scoreBar(this.scene, this.scene.sys.game.config.width / 2, 15, this.scorePoints);
+    this.score = new scoreBar(this.scene, this.scene.sys.game.config.width / 2, 15, this.scorePoints, this.multiplyBonus);
     this.createScoreTimer();
   }
 
@@ -171,28 +172,37 @@ export default class Player extends Phaser.GameObjects.Sprite {
       delay: 1000,
       loop: true,
       callback: () => {
-        this.scorePoints += 1;
-        this.score.update(this.scorePoints);
+        this.scorePoints += 1 * this.multiplyBonus;
+        this.score.update(this.scorePoints, this.multiplyBonus);
       },
     })
   }
 
   checkOverlaps() {
-    this.scene.physics.add.overlap(this.shots, this.scene.enemies, this.playerDamageEnemy, undefined, this)
-    this.scene.physics.add.overlap(this, this.scene.enemies, this.playerBumpEnemy, undefined, this)
+    this.scene.physics.add.overlap(this.shots, this.scene.enemies, this.playerDamageEnemy, undefined, this);
+    this.scene.physics.add.overlap(this, this.scene.enemies, this.playerBumpEnemy, undefined, this);
+    this.scene.physics.add.overlap(this, this.scene.multiplyBonus, this.playerBumpMultiplyBonus, undefined, this);
   }
 
   playerDamageEnemy(source, target) {
-    this.scorePoints += target.enemyType;
-    this.score.update(this.scorePoints);
+    this.scorePoints += target.enemyType * this.multiplyBonus;
+    this.score.update(this.scorePoints, this.multiplyBonus);
     target.damaged(source.damage);
     source.setAllive(false);
   }
 
   playerBumpEnemy(source, target) {
     this.crush(target.currentHealth);
+    this.multiplyBonus = 1;
+    this.score.update(this.scorePoints, this.multiplyBonus);
     target.setAllive(false);
     target.healthBar.clear();
+  }
+
+  playerBumpMultiplyBonus(source, target) {
+    this.multiplyBonus += target.multiplyBonus;
+    this.score.update(this.scorePoints, this.multiplyBonus);
+    target.setAllive(false);
   }
 
   crush(damage) {

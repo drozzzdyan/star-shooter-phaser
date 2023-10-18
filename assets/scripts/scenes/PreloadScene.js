@@ -18,6 +18,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.atlas('btn', 'assets/sprites/btn.png', 'assets/sprites/btn.json');
     this.load.atlas('shot', 'assets/sprites/shot.png', 'assets/sprites/shot.json');
     this.load.atlas('enemyShot', 'assets/sprites/enemyShot.png', 'assets/sprites/enemyShot.json');
+    this.load.atlas('multiplyBonus', 'assets/sprites/multiplyBonus.png', 'assets/sprites/multiplyBonus.json');
   }
 
   create() {
