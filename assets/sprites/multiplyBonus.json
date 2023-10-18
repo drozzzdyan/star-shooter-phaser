@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "bonusX2",
+	"frame": {"x":1,"y":1,"w":220,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":120},
+	"sourceSize": {"w":220,"h":120}
+},
+{
+	"filename": "bonusX3",
+	"frame": {"x":1,"y":121,"w":220,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":120},
+	"sourceSize": {"w":220,"h":120}
+},
+{
+	"filename": "bonusX5",
+	"frame": {"x":1,"y":241,"w":220,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":120},
+	"sourceSize": {"w":220,"h":120}
+},
+{
+	"filename": "bonusX7",
+	"frame": {"x":1,"y":361,"w":220,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":120},
+	"sourceSize": {"w":220,"h":120}
+},
+{
+	"filename": "bonusX9",
+	"frame": {"x":1,"y":481,"w":220,"h":120},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":220,"h":120},
+	"sourceSize": {"w":220,"h":120}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "multiplyBonus.png",
+	"format": "RGBA8888",
+	"size": {"w":222,"h":602},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:ce91a20f7f6819b3d0672bcf62252486:de6358601c7258bbdafcd466cfb17f43:99967a5cdda1794fb056ece0b40e9c0e$"
+}
+}
