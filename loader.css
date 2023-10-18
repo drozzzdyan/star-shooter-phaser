@@ -1,8 +1,8 @@
 :root {
-  --fucsia-dark: #411b61;
+  --fucsia-dark: #260c3b;
   --fucsia: #563172;
-  --violet: #715885;
-  --violet-light: #7f6891;
+  --violet: #7948a1;
+  --violet-light: #764e94;
 }
 
 .loader {
@@ -30,13 +30,12 @@
 .loader__circle {
   width: 30px;
   height: 30px;
-  border-radius: 100%;
   background-color: var(--fucsia-dark);
   transition: background-color .4s ease-in-out;
 }
 
 .loader__circles-hide:nth-child(n) {
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
   opacity: 0;
 }
 
@@ -78,7 +77,6 @@
 
 @keyframes move {
   0% {
-    transform: translateY(0);
     background-color: var(--fucsia-dark);
   }
 
@@ -87,7 +85,6 @@
   }
 
   50% {
-    transform: translateY(100px);
     background-color: var(--violet);
   }
 
@@ -96,7 +93,7 @@
   }
 
   100% {
-    transform: translateY(0);
+    background-color: var(--fucsia-dark);
   }
 }
 
