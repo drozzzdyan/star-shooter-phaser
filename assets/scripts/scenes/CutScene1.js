@@ -40,12 +40,12 @@ export default class CutScene1 extends Phaser.Scene {
       this.scene.start('Level1Scene', this.data);
     });
 
-    this.input.keyboard.on('keydown-SPACE', (event) => {
+    this.input.keyboard.on('keydown-SPACE', () => {
       this.scene.start('Level1Scene', this.data);
     });
 
     this.add.text(this.sys.game.config.width * 0.7, this.sys.game.config.height / 2, 'Protect your ally', {
-      fontFamily: 'Pixelify Sans',
+      fontFamily: 'Kanit',
       fontSize: '24px',
       color: '#b755b9',
     })

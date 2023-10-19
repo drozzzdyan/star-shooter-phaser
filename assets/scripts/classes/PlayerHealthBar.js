@@ -34,7 +34,7 @@ export default class PlayerHealthBar {
 
   renderText() {
     this.scene.add.text(this.x - 30, this.y - 8, 'HP', {
-      fontFamily: 'Pixelify Sans',
+      fontFamily: 'Kanit',
       fontSize: '18px',
       color: this.toColorHex(this.color),
     })

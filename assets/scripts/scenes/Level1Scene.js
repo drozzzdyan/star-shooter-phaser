@@ -47,7 +47,7 @@ export default class Level1Scene extends Phaser.Scene {
       this.player.setAllive(false);
       this.events.emit('lose');
       this.enemies.clear(true, true);
-      this.scene.start('EndScene', { score: this.player.scorePoints });
+      this.scene.start('EndScene', { score: this.player.scorePoints, shipType: this.player.shipType });
     }
   }
 

@@ -36,16 +36,19 @@ export default class StartScene extends Phaser.Scene {
     const midY = this.sys.game.config.height / 2;
 
     this.btnStart = new Btn(this, midX, midY, 'btn', 'btn_menu', 'btn_menu_active', 'Start');
-    // this.btnInstruction = new Btn(this, midX, midY + 50, 'btn', 'btn_menu', 'btn_menu_active', 'Instruction');
+    this.btnStatistics = new Btn(this, midX, midY + 50, 'btn', 'btn_menu', 'btn_menu_active', 'Records');
     // this.btnSettings = new Btn(this, midX, midY + 100, 'btn', 'btn_menu', 'btn_menu_active', 'Settings');
 
     this.btnStart.on('pointerdown', () => {
       this.scene.start('CutScene1', {
-      // this.scene.start('Level1Scene', {
         shipType: this.shipType,
         startPlayerX: this.startPlayerX,
         startPlayerY: this.startPlayerY,
       });
+    })
+
+    this.btnStatistics.on('pointerdown', () => {
+      this.scene.start('StatisticsScene');
     })
   }
 
@@ -58,7 +61,7 @@ export default class StartScene extends Phaser.Scene {
 
   renderTextHint() {
     this.add.text(this.startPlayerX, this.startPlayerY - 70, 'Tap to switch', {
-      fontFamily: 'Pixelify Sans',
+      fontFamily: 'Kanit',
       fontSize: '16px',
       color: '#b755b9',
     }).setOrigin(0.5)

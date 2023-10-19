@@ -24,7 +24,7 @@ export default class SpecificationsWindow {
     let indent = 35;
     specifications.forEach(el => {
       this.scene.add.text(this.boxLeftOffset + 10, this.boxTopOffset + indent, el, {
-        fontFamily: 'Pixelify Sans',
+        fontFamily: 'Kanit',
         fontSize: '16px',
         color: '#b755b9',
       })

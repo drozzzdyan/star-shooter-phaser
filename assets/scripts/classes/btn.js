@@ -8,7 +8,7 @@ export default class Btn extends Phaser.GameObjects.Sprite {
     this.scene.add.existing(this); //add the sprite to the stage
 
     scene.add.text(x, y, `${textInner}`, {
-      fontFamily: 'Pixelify Sans',
+      fontFamily: 'Kanit',
       fontSize: '18px',
       color: '#b755b9',
     }).setOrigin(0.5)

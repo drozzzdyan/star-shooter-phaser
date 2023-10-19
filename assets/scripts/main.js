@@ -2,12 +2,13 @@ import BootScene from "./scenes/BootScene.js";
 import PreloadScene from "./scenes/PreloadScene.js";
 import StartScene from "./scenes/StartScene.js";
 import Level1Scene from "./scenes/Level1Scene.js";
+import StatisticsScene from "./scenes/StatisticsScene.js";
 import CutScene1 from "./scenes/CutScene1.js";
 import EndScene from "./scenes/EndScene.js";
 
 const config = {
   type: Phaser.AUTO,
-  scene: [BootScene, PreloadScene, StartScene, CutScene1, Level1Scene, EndScene],
+  scene: [BootScene, PreloadScene, StartScene, StatisticsScene, CutScene1, Level1Scene, EndScene],
   physics: {
     default: 'arcade',
     arcade: {
