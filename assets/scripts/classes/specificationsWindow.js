@@ -20,7 +20,7 @@ export default class SpecificationsWindow {
   }
 
   renderText() {
-    const specifications = ['Health', 'Speed', 'Attack', 'Damage'];
+    const specifications = ['Health', 'Speed', 'Frequency', 'Damage'];
     let indent = 35;
     specifications.forEach(el => {
       this.scene.add.text(this.boxLeftOffset + 10, this.boxTopOffset + indent, el, {

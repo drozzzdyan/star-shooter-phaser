@@ -26,7 +26,7 @@ export default class StatisticsScene extends Phaser.Scene {
       for (let i = 0; i < records.length; i++) {
         const el = records[i];
         
-        this.add.sprite(midX - 50, topOffset + i * marginBottomText + 15, 'player', `player${records[i].shipType}`).setScale(0.35);
+        this.add.sprite(midX - 50, topOffset + i * marginBottomText + 15, 'player', `player${records[i].shipType}`).setScale(0.3);
         this.add.text(midX, topOffset + i * marginBottomText, `${records[i].record}`, {
           fontFamily: 'Kanit',
           fontSize: '30px',

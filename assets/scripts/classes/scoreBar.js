@@ -11,15 +11,16 @@ export default class scoreBar {
   render() {
     this.scoreText = this.scene.add.text(this.x, this.y, `${this.score}`, {
       fontFamily: 'Kanit',
-      fontSize: '30px',
+      fontSize: '32px',
       color: '#b755b9',
-    })
+    }).setOrigin(0.5);
 
-    this.multiplyBonus = this.scene.add.text(this.x - 100, this.y + 3, `${this.multiplyBonus}x`, {
+    this.multiplyBonus = this.scene.add.text(this.x, this.y + 30, `${this.multiplyBonus}x`, {
       fontFamily: 'Kanit',
-      fontSize: '24px',
-      color: '#d974db',
-    })
+      fontSize: '20px',
+      fontWeight: '700',
+      color: '#de72e0',
+    }).setOrigin(0.5);
   }
 
   update(score, multiplyBonus) {

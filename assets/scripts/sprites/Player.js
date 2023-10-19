@@ -85,7 +85,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.keyboardControll();
     this.healthBar = new PlayerHealthBar(this.scene, 40, 28, this.currentHealth);
     this.allyHealthBar = new PlayerHealthBar(this.scene, 40, this.scene.sys.game.config.height - 28, this.currentAllyHealth, 0x0000ff);
-    this.score = new scoreBar(this.scene, this.scene.sys.game.config.width / 2, 15, this.scorePoints, this.multiplyBonus);
+    this.score = new scoreBar(this.scene, this.scene.sys.game.config.width / 2, 25, this.scorePoints, this.multiplyBonus);
     this.createScoreTimer();
   }
 
