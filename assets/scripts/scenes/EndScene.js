@@ -4,9 +4,15 @@ export default class EndScene extends Phaser.Scene {
   }
 
   create(data) {
-    this.createSkipEvents();
     this.saveStatistics(data);
     this.renderStatistics(data);
+
+    this.time.addEvent({
+      delay: 1000,
+      callback: () => {
+        this.createSkipEvents();
+      }
+    })
   }
 
   saveStatistics(data) {

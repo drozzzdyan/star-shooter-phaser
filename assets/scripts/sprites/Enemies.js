@@ -64,7 +64,7 @@ export default class Enemies extends Phaser.Physics.Arcade.Group {
   generateRandomPositionsY(quantity) {
     const spread = 10;
     const startY = 90;
-    const endY = this.scene.sys.game.config.height - 20;
+    const endY = this.scene.sys.game.config.height - 50;
     const differenceY = endY - startY;
     const stepY = differenceY / quantity;
 
