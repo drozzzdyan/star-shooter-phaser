@@ -3,12 +3,13 @@ import PreloadScene from "./scenes/PreloadScene.js";
 import StartScene from "./scenes/StartScene.js";
 import Level1Scene from "./scenes/Level1Scene.js";
 import StatisticsScene from "./scenes/StatisticsScene.js";
+import InstructionScene from "./scenes/InstructionScene.js";
 import CutScene1 from "./scenes/CutScene1.js";
 import EndScene from "./scenes/EndScene.js";
 
 const config = {
   type: Phaser.AUTO,
-  scene: [BootScene, PreloadScene, StartScene, StatisticsScene, CutScene1, Level1Scene, EndScene],
+  scene: [BootScene, PreloadScene, StartScene, StatisticsScene, InstructionScene, CutScene1, Level1Scene, EndScene],
   physics: {
     default: 'arcade',
     arcade: {
@@ -20,13 +21,17 @@ const config = {
 const gameWidth = 1024;
 const gameHeight = 576;
 let game;
+let onceFlag = true;
 launchGame();
 
 window.addEventListener("resize", () => {
-  if (game) {
-    game.destroy(true);
+  if (onceFlag) {
+    if (game) {
+      game.destroy(true);
+    }
+    launchGame();
+    onceFlag = false;
   }
-  launchGame();
   if (window.innerHeight > window.innerWidth) {
     createOrientationModal();
   } else {

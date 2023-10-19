@@ -19,7 +19,7 @@ export default class scoreBar {
       fontFamily: 'Kanit',
       fontSize: '20px',
       fontWeight: '700',
-      color: '#de72e0',
+      color: '#f4b3f5',
     }).setOrigin(0.5);
   }
 

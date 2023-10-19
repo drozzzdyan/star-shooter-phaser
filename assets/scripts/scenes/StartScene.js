@@ -37,7 +37,7 @@ export default class StartScene extends Phaser.Scene {
 
     this.btnStart = new Btn(this, midX, midY, 'btn', 'btn_menu', 'btn_menu_active', 'Start');
     this.btnStatistics = new Btn(this, midX, midY + 50, 'btn', 'btn_menu', 'btn_menu_active', 'Records');
-    // this.btnSettings = new Btn(this, midX, midY + 100, 'btn', 'btn_menu', 'btn_menu_active', 'Settings');
+    // this.btnInstruction = new Btn(this, midX, midY + 100, 'btn', 'btn_menu', 'btn_menu_active', 'Instruction');
 
     this.btnStart.on('pointerdown', () => {
       this.scene.start('CutScene1', {
@@ -50,6 +50,10 @@ export default class StartScene extends Phaser.Scene {
     this.btnStatistics.on('pointerdown', () => {
       this.scene.start('StatisticsScene');
     })
+
+    // this.btnInstruction.on('pointerdown', () => {
+    //   this.scene.start('InstructionScene');
+    // })
   }
 
   onPlayerTap(pointer, object) {
