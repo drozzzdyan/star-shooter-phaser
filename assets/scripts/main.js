@@ -21,23 +21,23 @@ const config = {
 const gameWidth = 1024;
 const gameHeight = 576;
 let game;
-let onceFlag = true;
 launchGame();
 
-window.addEventListener("resize", () => {
-  if (onceFlag) {
-    if (game) {
-      game.destroy(true);
-    }
-    launchGame();
-    onceFlag = false;
+if (window.innerHeight > window.innerWidth) {
+  createOrientationModal();
+  window.addEventListener("resize", firstCreate);
+} else {
+  removeOrientationModal();
+  firstCreate();
+}
+
+function firstCreate() {
+  if (game) {
+    game.destroy(true);
   }
-  if (window.innerHeight > window.innerWidth) {
-    createOrientationModal();
-  } else {
-    removeOrientationModal();
-  }
-});
+  launchGame();
+  window.removeEventListener("resize", firstCreate);
+}
 
 function launchGame() {
   createOrientationModal()
