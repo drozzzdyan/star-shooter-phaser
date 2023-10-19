@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "hurt1",
+	"frame": {"x":1,"y":1,"w":121,"h":101},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":121,"h":101},
+	"sourceSize": {"w":121,"h":101}
+},
+{
+	"filename": "hurt2",
+	"frame": {"x":123,"y":1,"w":120,"h":101},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":120,"h":101},
+	"sourceSize": {"w":120,"h":101}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "healthBonus.png",
+	"format": "RGBA8888",
+	"size": {"w":244,"h":103},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:72039e3b3cc48b26151629d956cefff5:0ba5a82d4657b60fd2b69015f285d40b:5ef0ff2a0cd414cd63fb3d4af659cb6f$"
+}
+}

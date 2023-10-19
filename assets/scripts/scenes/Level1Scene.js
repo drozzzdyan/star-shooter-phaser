@@ -1,5 +1,6 @@
 import Enemies from "../sprites/Enemies.js";
-import multiplyBonus from "../sprites/MultiplyBonus.js";
+import HealthBonus from "../sprites/HealthBonus.js";
+import MultiplyBonus from "../sprites/MultiplyBonus.js";
 import Player from "../sprites/Player.js";
 
 export default class Level1Scene extends Phaser.Scene {
@@ -27,8 +28,8 @@ export default class Level1Scene extends Phaser.Scene {
     this.enemies = new Enemies(this);
     this.enemies.createEnemiesGroup();
 
-    this.multiplyBonus = new multiplyBonus(this);
-
+    this.multiplyBonus = new MultiplyBonus(this);
+    this.healthBonus = new HealthBonus(this);
     this.player.checkOverlaps();
   }
 

@@ -24,9 +24,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.worldOffset = 40;
     this.worldOffsetAdditional = 40;
 
+    this.maxAllyHealth = 100;
     this.currentAllyHealth = 100;
     this.shipConfig = shipsConfigs.find(el => el.type === this.shipType);
     this.currentHealth = this.shipConfig.health;
+    this.maxHealth = this.shipConfig.health;
     const speedCoefficient = 5;
     const speed = this.shipConfig.speed * speedCoefficient;
     this.speed = speed;
@@ -182,6 +184,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.physics.add.overlap(this.shots, this.scene.enemies, this.playerDamageEnemy, undefined, this);
     this.scene.physics.add.overlap(this, this.scene.enemies, this.playerBumpEnemy, undefined, this);
     this.scene.physics.add.overlap(this, this.scene.multiplyBonus, this.playerBumpMultiplyBonus, undefined, this);
+    this.scene.physics.add.overlap(this, this.scene.healthBonus, this.playerBumpHealthBonus, undefined, this);
   }
 
   playerDamageEnemy(source, target) {
@@ -202,6 +205,18 @@ export default class Player extends Phaser.GameObjects.Sprite {
   playerBumpMultiplyBonus(source, target) {
     this.multiplyBonus += target.multiplyBonus;
     this.score.update(this.scorePoints, this.multiplyBonus);
+    target.setAllive(false);
+  }
+
+  playerBumpHealthBonus(source, target) {
+    if (target.hurtType == 1) {
+      this.currentHealth = this.currentHealth + 30 < this.maxHealth ? this.currentHealth + 30 : this.maxHealth;
+      this.healthBar.showHealthBar(this.currentHealth);
+    } else if (target.hurtType == 2) {
+      this.currentAllyHealth = this.currentAllyHealth + 30 < this.maxAllyHealth ? this.currentAllyHealth + 50 : this.maxAllyHealth;
+      this.allyHealthBar.showHealthBar(this.currentAllyHealth);
+    }
+
     target.setAllive(false);
   }
 

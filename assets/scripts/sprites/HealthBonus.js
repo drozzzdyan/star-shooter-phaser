@@ -1,6 +1,6 @@
-export default class MultiplyBonus extends Phaser.GameObjects.Sprite {
+export default class HealthBonus extends Phaser.GameObjects.Sprite {
   constructor(scene) {
-    super(scene, scene.sys.game.config.width + 50, 0, 'multiplyBonus', 'bonusX2');
+    super(scene, scene.sys.game.config.width + 50, 0, 'healthBonus', 'hurt1');
     this.scene = scene;
     this.init();
   }
@@ -14,7 +14,7 @@ export default class MultiplyBonus extends Phaser.GameObjects.Sprite {
     this.generateParams();
 
     this.timerCreate = this.scene.time.addEvent({
-      delay: 15000,
+      delay: this.generateDelay,
       loop: true,
       callback: () => {
         this.setAllive(true);
@@ -45,25 +45,20 @@ export default class MultiplyBonus extends Phaser.GameObjects.Sprite {
     if (this.x < -50) {
       this.x = this.scene.sys.game.config.width + 50;
       this.generateParams();
+      this.timerCreate.delay = this.generateDelay;
       this.timerMoving.paused = true;
     }
   }
 
   generateParams() {
-    this.multiplyBonus = this.generateRandomMultiply();
-    this.setFrame(`bonusX${this.multiplyBonus}`);
+    this.generateDelay = Phaser.Math.Between(15000, 40000);
+    this.hurtType = Phaser.Math.Between(1, 2);
+    this.setFrame(`hurt${this.hurtType}`);
 
     this.ySpread = Phaser.Math.Between(80, 130);
     this.xSpread = Phaser.Math.Between(60, 200);
     this.yOffset = Phaser.Math.Between(-80, 80) + this.scene.sys.game.config.height / 2;
     this.xMoveDelay = Phaser.Math.Between(7, 13);
-  }
-
-  generateRandomMultiply() {
-    const multiplyBonuses = [2, 3, 5, 7, 9];
-    const i = Phaser.Math.Between(0, 4);
-
-    return multiplyBonuses[i];
   }
 
   setAllive(alliveCondition) {
