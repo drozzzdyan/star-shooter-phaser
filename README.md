@@ -1,4 +1,4 @@
-<h1 align="center"> Stat shooter :rocket: </h1>
+<h1 align="center"> Star shooter :rocket: </h1>
 
 It's a simple game developed based on the Phaser game engine. This game has been adapted for both touch devices and desctops. Choose a ship, protect your ally and yourself, collect bonuses and hold out as long as possible. Try it! :slightly_smiling_face:
 <br><br><br><br>
